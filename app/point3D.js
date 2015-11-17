@@ -8,19 +8,13 @@ function Vertex(x, y, z){
   this.y = y;
   this.z = z;
 
-  this.getVertex = function(){
-    var vertex = [];
-
-    vertex.push(this.x;
-    vertex.push(this.y);
-    vertex.push(this.z);
-
-    return vertex;
-  }
-
   this.updateVertex = function(x, y, z){
     this.x = x;
     this.y = y;
     this.z = z;
+  }
+
+  this.getVertex = function() {
+    return [this.x, this.y, this.z];
   }
 }
