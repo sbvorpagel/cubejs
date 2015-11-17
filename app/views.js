@@ -7,7 +7,15 @@ function startViews() {
   //Adiciona a função click apenas no canvas, xy retorna 1
   xy.addEventListener('click', function(event) {
     alert("sou um XY, click em: " + event.x + ", " + event.y);
+    //pega o valor "x" e "y" do cubo event.x e event.y
+    //gerar um novo cubo passando o x e o y
+    //add ele na lista de cubo
+    //refazer todos os desenhos
   });
+
+  //definir as cores da view
+  ctxy.fillStyle = "rgb(240,240,240)";
+  ctxy.fillRect(0,0,580,367);
 
   var xz = document.getElementById("view_xz");
   if (xz && xz.getContext) {
@@ -18,6 +26,10 @@ function startViews() {
   xz.addEventListener('click', function(event) {
     alert("sou um XZ");
   });
+
+  //definir as cores da view
+  ctxz.fillStyle = "rgb(240,240,240)";
+  ctxz.fillRect(0,0,580,367);
 
   var zy = document.getElementById("view_zy");
   if (zy && zy.getContext) {
@@ -30,6 +42,10 @@ function startViews() {
 
   });
 
+  //definir as cores da view
+  ctzy.fillStyle = "rgb(240,240,240)";
+  ctzy.fillRect(0,0,580,367);
+
   var view = document.getElementById("view");
   if (view && view.getContext) {
     ctview = view.getContext("2d");
@@ -40,4 +56,8 @@ function startViews() {
     alert("sou uma View");
 
   });
+
+  //definir as cores da view
+  ctview.fillStyle = "rgb(240,240,240)";
+  ctview.fillRect(0,0,580,367);
 }
