@@ -10,13 +10,17 @@ function Face(a, b, c, d){
   this.d = d;
 
   this.normal = function(){
-    var cb = [b.x - c.x, b.y - c.y, b.z - c.z];
-    var cd = [d.x - c.x, d.y - c.y, d.z - c.z];
-
-    var _normal = [
-      (cd[1] * cb[2]) - (cb[2] * cb[1]),
-      (cd[2] * cb[0]) - (cd[0] * cb[2]),
-      (cd[0] * cb[1]) - (cd[1] * cb[0])
+    var bc = [c.x - b.x, c.y - b.y, c.z - b.z];
+    var ba = [a.x - b.x, a.y - b.y, a.z - b.z];
+    var normal = [
+      (bc[1] * ba[2]) - (ba[2] * ba[1]),
+      (bc[2] * ba[0]) - (bc[0] * ba[2]),
+      (bc[0] * ba[1]) - (bc[1] * ba[0])
     ];
+    var m_normal = Math.sqrt(
+      Math.pow(normal[0], 2) + Math.pow(normal[1], 2) + Math.pow(normal[2], 2)
+    );
+    var n_normal = [normal[0]/m_normal, normal[1]/m_normal, normal[2]/m_normal];
+    return n_normal;
   }
 }
