@@ -16,9 +16,9 @@ function main () {
   //window.onload = startViews;
 
   //simulate mouse click
-  var x = 0;
-  var y = 0;
-  var z = 0;
+  var x = 50;
+  var y = 35;
+  var z = 55;
 
   var cube = new Cube();
   cube.createCube(x, y, z);
@@ -32,6 +32,10 @@ function main () {
   console.log(aux[0]);
   console.log(aux[2]);
   console.log(aux[4]);
+
+  console.log(cube.normal(0));
+
+
 
 
 
