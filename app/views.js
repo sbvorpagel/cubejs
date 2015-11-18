@@ -1,21 +1,80 @@
-function startViews() {
+function startViews(cubes) {
+
+  this.cubes = cubes;
+  console.log(this.cubes);
+  console.log(this.cubes[0]);
+
+  getCube = function() {
+    return this.cubes
+  }
+
   var xy = document.getElementById("view_xy");
   if (xy && xy.getContext) {
     ctxy = xy.getContext("2d");
     //aqui vai o loop
   }
-  //Adiciona a função click apenas no canvas, xy retorna 1
-  xy.addEventListener('click', function(event) {
-    alert("sou um XY, click em: " + event.x + ", " + event.y);
-    //pega o valor "x" e "y" do cubo event.x e event.y
-    //gerar um novo cubo passando o x e o y
-    //add ele na lista de cubo
-    //refazer todos os desenhos
-  });
 
   //definir as cores da view
   ctxy.fillStyle = "rgb(240,240,240)";
   ctxy.fillRect(0,0,580,367);
+  ctxy.strokeStyle = "rgb(0, 0, 0)";
+
+  //Adiciona a função click apenas no canvas, xy retorna 1
+  xy.addEventListener('click', function(event) {
+    var x = event.x;
+    var y = event.y;
+    var z = 0;
+    var cube = getCube()[0];
+    for (var i = 0; i < 6; i++) {
+      var f = cube.faces[i];
+      ctxy.beginPath();
+
+      ctxy.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].y);
+      ctxy.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].y);
+      ctxy.lineTo(cube.vertices[[f[2]]].x, cube.vertices[[f[2]]].y);
+      ctxy.lineTo(cube.vertices[[f[3]]].x, cube.vertices[[f[3]]].y);
+      ctxy.closePath();
+      ctxy.stroke();
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   var xz = document.getElementById("view_xz");
   if (xz && xz.getContext) {
@@ -60,4 +119,7 @@ function startViews() {
   //definir as cores da view
   ctview.fillStyle = "rgb(240,240,240)";
   ctview.fillRect(0,0,580,367);
+
+
+
 }
