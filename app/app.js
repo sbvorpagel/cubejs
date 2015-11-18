@@ -15,18 +15,15 @@ function main () {
   console.log("Fim do log referente ao observador")
   //window.onload = startViews;
 
+  //simulate mouse click
+  var x = 0;
+  var y = 0;
+  var z = 0;
 
-  console.log("Inicio do log referente a Vertex");
-  var pa = new Vertex(1, 2, 0);
-  var pb = new Vertex(2, 0, 1);
-  var pc = new Vertex(0, 2, 3);
-  console.log("Fim do logo referente a Vertex");
+  var cube = new Cube();
+  cube.createCube(x, y, z);
+  aux = cube.cube2matrix();
+  console.log(aux[0]);
 
-  console.log("Inicio do log referente a Face");
-  var f = new Face(pc, pa, pb);
-  var f_normal = f.normal();
-  console.log(f_normal);
-  var vis = n[0]*f_normal[0] + [1]*f_normal[1] + [2]*f_normal[2];
-  console.log(vis);
-  console.log("Fim do log referente a Face");
+
 }

@@ -23,4 +23,5 @@ function Face(a, b, c, d){
     var n_normal = [normal[0]/m_normal, normal[1]/m_normal, normal[2]/m_normal];
     return n_normal;
   }
+
 }
