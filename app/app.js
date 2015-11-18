@@ -16,24 +16,19 @@ function main () {
   //window.onload = startViews;
 
   //simulate mouse click
-  var x = 50;
-  var y = 35;
-  var z = 55;
+  var x = 10;
+  var y = 10;
+  var z = 10;
 
   var cube = new Cube();
   cube.createCube(x, y, z);
-  aux = cube.cube2matrix();
-  console.log(aux[0]);
-  console.log(aux[2]);
-  console.log(aux[4]);
-
-  cube.matrix2cube(aux);
-  aux = cube.cube2matrix();
-  console.log(aux[0]);
-  console.log(aux[2]);
-  console.log(aux[4]);
-
-  console.log(cube.normal(0));
+  var aux = cube.normal(0);
+  console.log(n);
+  console.log(aux);
+  var visible = (
+    n[0]*aux[0] + n[1]*aux[1]+n[2]*aux[2]
+  );  
+  console.log(visible);
 
 
 

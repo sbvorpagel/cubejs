@@ -11,15 +11,24 @@ function Cube() {
 
   // X, Y, Z  = center
   this.createCube = function (x, y, z) {
+    console.log("criação do cubo");
     var a = new Vertex(x-JUMP, y+JUMP, z-JUMP);
+    console.log(a);
     var b = new Vertex(x+JUMP, y+JUMP, z-JUMP);
+    console.log(b);
     var c = new Vertex(x+JUMP, y-JUMP, z-JUMP);
+    console.log(c);
     var d = new Vertex(x-JUMP, y-JUMP, z-JUMP);
+    console.log(d);
     var e = new Vertex(x-JUMP, y+JUMP, z+JUMP);
+    console.log(e);
     var f = new Vertex(x+JUMP, y+JUMP, z+JUMP);
+    console.log(f);
     var g = new Vertex(x+JUMP, y-JUMP, z+JUMP);
+    console.log(g);
     var h = new Vertex(x-JUMP, y-JUMP, z+JUMP);
-
+    console.log(h);
+    console.log("fim criação do cubo");
     //só tem que confirmar se está na ordem certa e tb se é antihorário
     this.vertices = [a, b, c, d, e, f, g, h];
     this.faces = [[0,1,2,3],[1,5,6,2],[5,4,7,6],[4,0,3,7],[0,4,5,1],[3,2,6,7]];
