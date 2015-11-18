@@ -8,19 +8,10 @@ function main () {
   var n = [N[0]/nN, N[1]/nN, N[2]/nN];
   //window.onload = startViews;
 
-  //simulate mouse click
-  var x = 200;
-  var y = 200;
-  var z = 200;
+  var cubes = new Cubes();
 
-  var cube = new Cube();
-  cube.createCube(x, y, z);
-  var aux = cube.normal(0);
-  var visible = (
-    n[0]*aux[0] + n[1]*aux[1]+n[2]*aux[2]
-  );
+  startViews(cubes);
 
-  startViews([cube]);
 
 
 
