@@ -24,6 +24,15 @@ function main () {
   cube.createCube(x, y, z);
   aux = cube.cube2matrix();
   console.log(aux[0]);
+  console.log(aux[2]);
+  console.log(aux[4]);
+
+  cube.matrix2cube(aux);
+  aux = cube.cube2matrix();
+  console.log(aux[0]);
+  console.log(aux[2]);
+  console.log(aux[4]);
+
 
 
 }

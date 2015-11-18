@@ -23,4 +23,10 @@ function Vertex(x, y, z) {
     return array;
   }
 
+  this.array2vertex = function (array) {
+    this.x = array[0];
+    this.y = array[1];
+    this.z = array[2];
+  }
+
 }

@@ -47,4 +47,10 @@ function Cube() {
     return matrix;
   }
 
+  this.matrix2cube = function (matrix) {
+    for (var i = 0; i < 6; i++) {
+      this.vertices[i].array2vertex(matrix[i]);
+    }
+  }
+
 }
