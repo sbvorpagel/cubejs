@@ -53,11 +53,37 @@ function startViews(cubes) {
   }
 
   drawXZ = function () {
-
+    var cubes = getCubes().getCubes();
+    for (var x = 0; x < cubes.length; x++) {
+      var cube = cubes[x];
+      for (var i = 0; i < 6; i++) {
+        var f = cube.faces[i];
+        ctxz.beginPath();
+        ctxz.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].z);
+        ctxz.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].z);
+        ctxz.lineTo(cube.vertices[[f[2]]].x, cube.vertices[[f[2]]].z);
+        ctxz.lineTo(cube.vertices[[f[3]]].x, cube.vertices[[f[3]]].z);
+        ctxz.closePath();
+        ctxz.stroke();
+      }
+    }
   }
 
-  drawZX = function () {
-
+  drawZY = function () {
+    var cubes = getCubes().getCubes();
+    for (var x = 0; x < cubes.length; x++) {
+      var cube = cubes[x];
+      for (var i = 0; i < 6; i++) {
+        var f = cube.faces[i];
+        ctzy.beginPath();
+        ctzy.moveTo(cube.vertices[[f[0]]].y, cube.vertices[[f[0]]].z);
+        ctzy.lineTo(cube.vertices[[f[1]]].y, cube.vertices[[f[1]]].z);
+        ctzy.lineTo(cube.vertices[[f[2]]].y, cube.vertices[[f[2]]].z);
+        ctzy.lineTo(cube.vertices[[f[3]]].y, cube.vertices[[f[3]]].z);
+        ctzy.closePath();
+        ctzy.stroke();
+      }
+    }
   }
 
   drawView = function () {
@@ -67,7 +93,7 @@ function startViews(cubes) {
   function drawCube() {
     drawXY();
     drawXZ();
-    drawZX();
+    drawZY();
     drawView();
   }
 
@@ -84,12 +110,22 @@ function startViews(cubes) {
   xz.addEventListener('click', function(event) {
     cubes = getCubes();
     var cube = new Cube();
-    cube.createCube(event.x, 0, event.y);
+    var rect = xz.getBoundingClientRect();
+    cube.createCube(event.x - rect.left, 0, event.y - rect.top);
     cubes.addCube(cube);
     console.log(cubes);
     drawCube();
   });
 
+  zy.addEventListener('click', function(event) {
+    cubes = getCubes();
+    var cube = new Cube();
+    var rect = xz.getBoundingClientRect();
+    cube.createCube(0, event.x - rect.left, event.y - rect.top);
+    cubes.addCube(cube);
+    console.log(cubes);
+    drawCube();
+  });
 
 
 
@@ -135,13 +171,6 @@ function startViews(cubes) {
   //definir as cores da view
   ctxz.fillStyle = "rgb(240,240,240)";
   ctxz.fillRect(0,0,580,367);
-
-
-  //Adiciona a função click apenas no canvas, yz retorna 3
-  zy.addEventListener('click', function(event) {
-    alert("sou um ZY");
-
-  });
 
   //definir as cores da view
   ctzy.fillStyle = "rgb(240,240,240)";
