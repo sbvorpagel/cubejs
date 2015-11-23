@@ -28,7 +28,7 @@ function Cube() {
 
   this.cube2matrix = function () {
     var matrix = [];
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 8; i++) {
       aux = this.vertices[i].vertex2array();
       matrix.push(aux);
     }
@@ -36,7 +36,7 @@ function Cube() {
   }
 
   this.matrix2cube = function (matrix) {
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 8; i++) {
       this.vertices[i].array2vertex(matrix[i]);
     }
   }
