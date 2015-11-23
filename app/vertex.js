@@ -14,13 +14,8 @@ function Vertex(x, y, z) {
     this.z = z;
   }
 
-  this.getVertex = function() {
-    return [this.x, this.y, this.z];
-  }
-
   this.vertex2array = function () {
-    var array = [this.x, this.y, this.z, 1];
-    return array;
+    return = [this.x, this.y, this.z, 1];
   }
 
   this.array2vertex = function (array) {
