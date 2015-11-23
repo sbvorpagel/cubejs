@@ -15,7 +15,7 @@ function Vertex(x, y, z) {
   }
 
   this.vertex2array = function () {
-    return = [this.x, this.y, this.z, 1];
+    return [this.x, this.y, this.z, 1];
   }
 
   this.array2vertex = function (array) {
