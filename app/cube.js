@@ -8,8 +8,10 @@ function Cube() {
   this.c;
   this.faces;
   this.vertices;
+  this.center;
 
   this.createCube = function (x, y, z) {
+    this.center = [x, y, z];
     var a = new Vertex(x-JUMP, y+JUMP, z-JUMP);
     var b = new Vertex(x+JUMP, y+JUMP, z-JUMP);
     var c = new Vertex(x+JUMP, y-JUMP, z-JUMP);
