@@ -9,7 +9,6 @@ function Cube() {
   this.faces;
   this.vertices;
 
-  // X, Y, Z  = center
   this.createCube = function (x, y, z) {
     var a = new Vertex(x-JUMP, y+JUMP, z-JUMP);
     var b = new Vertex(x+JUMP, y+JUMP, z-JUMP);
@@ -19,7 +18,6 @@ function Cube() {
     var f = new Vertex(x+JUMP, y+JUMP, z+JUMP);
     var g = new Vertex(x+JUMP, y-JUMP, z+JUMP);
     var h = new Vertex(x-JUMP, y-JUMP, z+JUMP);
-    //só tem que confirmar se está na ordem certa e tb se é antihorário
     this.vertices = [a, b, c, d, e, f, g, h];
     this.faces = [[0,1,2,3],[1,5,6,2],[5,4,7,6],[4,0,3,7],[0,4,5,1],[3,2,6,7]];
   }
