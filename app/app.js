@@ -8,7 +8,7 @@ function main () {
   var n = [N[0]/nN, N[1]/nN, N[2]/nN];
   //window.onload = startViews;
 
-  var cubes = new Cubes();
+  var cubes = new Objects();
 
   startViews(cubes);
 
