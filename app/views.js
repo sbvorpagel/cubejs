@@ -2,7 +2,7 @@ function startViews(cubes) {
 
   this.cubes = cubes;
 
-  getCubes = function() {
+  getObjects = function() {
     return this.cubes
   }
 
@@ -36,7 +36,7 @@ function startViews(cubes) {
 
 
   drawXY = function() {
-    var cubes = getCubes().getCubes();
+    var cubes = getObjects().getObjects();
     for (var x = 0; x < cubes.length; x++) {
       var cube = cubes[x];
       for (var i = 0; i < 6; i++) {
@@ -53,7 +53,7 @@ function startViews(cubes) {
   }
 
   drawXZ = function () {
-    var cubes = getCubes().getCubes();
+    var cubes = getObjects().getObjects();
     for (var x = 0; x < cubes.length; x++) {
       var cube = cubes[x];
       for (var i = 0; i < 6; i++) {
@@ -70,7 +70,7 @@ function startViews(cubes) {
   }
 
   drawZY = function () {
-    var cubes = getCubes().getCubes();
+    var cubes = getObjects().getObjects();
     for (var x = 0; x < cubes.length; x++) {
       var cube = cubes[x];
       for (var i = 0; i < 6; i++) {
@@ -99,16 +99,16 @@ function startViews(cubes) {
 
   //Adiciona a função click apenas no canvas, xy retorna 1
   xy.addEventListener('click', function(event) {
-    cubes = getCubes();
+    cubes = getObjects();
     var cube = new Cube();
     cube.createCube(event.x, event.y, 0);
-    cubes.addCube(cube);
+    cubes.addObjects(cube);
     console.log(cubes);
     drawCube();
   });
 
   xz.addEventListener('click', function(event) {
-    cubes = getCubes();
+    cubes = getObjects();
     var cube = new Cube();
     var rect = xz.getBoundingClientRect();
     cube.createCube(event.x - rect.left, 0, event.y - rect.top);
@@ -118,7 +118,7 @@ function startViews(cubes) {
   });
 
   zy.addEventListener('click', function(event) {
-    cubes = getCubes();
+    cubes = getObjects();
     var cube = new Cube();
     var rect = xz.getBoundingClientRect();
     cube.createCube(0, event.x - rect.left, event.y - rect.top);

@@ -13,12 +13,12 @@ function Objects() {
   this.objects = [];
 
   // Add a list of one or more elements to the list of Objects
-  this.addCube = function(list) {
+  this.addObjects = function(list) {
     this.objects.push(list);
   }
 
   // Gets the list an returns it
-  this.getCubes = function() {
+  this.getObjects= function() {
     return this.objects;
   }
 }
