@@ -41,3 +41,29 @@ function rotation_z (angule, cube) {
   cube = multiply(matriz_rz, cube);
   return cube;
 }
+
+function rotation_y (angule, cube) {
+  var cos = Math.cos(angule*PI/180);
+  var sin = Math.sin(angule*PI/180);
+  matriz_ry = [
+    [cos, 0, sin, 0],
+    [0, 1, 0, 0],
+    [-sin, 0, cos, 0],
+    [0, 0, 0, 1]
+  ];
+  cube = multiply(matriz_ry, cube);
+  return cube;
+}
+
+function rotation_x (angule, cube) {
+  var cos = Math.cos(angule*PI/180);
+  var sin = Math.sin(angule*PI/180);
+  matriz_rx = [
+    [1, 0, 0, 0],
+    [0, cos, -sin, 0],
+    [0, sin, cos, 0],
+    [0, 0, 0, 1]
+  ];
+  cube = multiply(matriz_rx, cube);
+  return cube;
+}
