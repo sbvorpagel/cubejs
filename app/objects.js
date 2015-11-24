@@ -1,7 +1,7 @@
 /* Defines the Object class
 
-   This class stores all the objects that
-   were created by the user in a list.
+   This class stores in a list all the objects
+   that were created by the user.
 
    The list is defined as a list of lists, i.e,
    every item is another list with one or more
