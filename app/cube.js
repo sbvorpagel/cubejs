@@ -1,5 +1,14 @@
 /* Defines the Cube object
-   TODO
+
+   This class defines the attributes, and functions
+   that operate over those attributes, of a Cube
+   in space (R³).
+
+   Every cube has the following attributes:
+   - 1 color
+   - 6 faces (stored in a list)
+   - 8 vertices (stored in a list)
+   - 1 center
 */
 
 var JUMP = 50;
@@ -10,6 +19,21 @@ function Cube() {
   this.vertices;
   this.center;
 
+  /*
+    Creates a cube given the coordinates of its
+    center. A jump value is defined beforehand
+    and is used to calculate the coordinates of
+    each vertex.
+
+    To calculate the coordinates of each vertex
+    the constructor adds or subtracts a JUMP value
+    to the center coordinates This JUMP value is
+    equal to the (cube length)/2. The JUMP value
+    is not defined by the user so each cube is
+    created with the same size.
+
+    Parameter: Center (x,y,z) of the cube.
+  */
   this.createCube = function (x, y, z) {
     this.center = [x, y, z];
     var a = new Vertex(x-JUMP, y+JUMP, z-JUMP);
@@ -24,10 +48,13 @@ function Cube() {
     this.faces = [[0,1,2,3],[1,5,6,2],[5,4,7,6],[4,0,3,7],[0,4,5,1],[3,2,6,7]];
   }
 
+  // Updates the color attribute
   this.updateColor = function(c) {
     this.c = c
   }
 
+
+  //Transform a list of vertices into a matrix
   this.cube2matrix = function () {
     var matrix = [];
     for (var i = 0; i < 8; i++) {
@@ -37,13 +64,22 @@ function Cube() {
     return matrix;
   }
 
+  /*
+    Transform a matrix of vertices back to a list.
+    Parameter: Matrix of vertices
+  */
   this.matrix2cube = function (matrix) {
     for (var i = 0; i < 8; i++) {
       this.vertices[i].array2vertex(matrix[i]);
     }
   }
 
-  //Parameter: Face index.
+  /*
+    Calculates the normal vector of a given face.
+    This is used later to defineif a face is visible
+    or not.
+    Parameter: Face index.
+  */
   this.normal = function(i){
     a = this.vertices[this.faces[i][0]];
     b = this.vertices[this.faces[i][1]];
