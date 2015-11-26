@@ -5,9 +5,9 @@
 function startViews(cubes){
   this.cubes = cubes;
 
-  var CENTER_X = 290;
-  var CENTER_Y = 183;
-  var CENTER_Z = 183;
+  var CENTER_X = 315;
+  var CENTER_Y = 163;
+  var CENTER_Z = 163;
 
   getCubes = function(){
     return this.cubes;
