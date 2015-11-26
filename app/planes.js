@@ -9,6 +9,7 @@ function startViews(cubes){
   var CENTER_Y = 163;
   var CENTER_Z = 163;
   var JUMP     = 30;
+
   getCubes = function(){
     return this.cubes;
   }
