@@ -2,6 +2,47 @@
   Defines the canvas used as
   view planes.
 */
+
+function button_save() {
+  console.log("Click no salvar");
+}
+
+function button_open() {
+  console.log("Click no abrir");
+}
+
+function button_cube() {
+  console.log("Click no cubo");
+}
+
+function button_select() {
+  console.log("Click no selecionar");
+}
+
+function button_cubes() {
+  console.log("Click nos cubos");
+}
+
+function button_move() {
+  console.log("Click no translate");
+}
+
+function button_rotation() {
+  console.log("Click na rotação");
+}
+
+function button_scale() {
+  console.log("Click na escala");
+}
+
+function button_visible() {
+  console.log("Click na ocutação de face");
+}
+
+function button_delete() {
+  console.log("Click no Delete");
+}
+
 function startViews(cubes){
   this.cubes = cubes;
 
