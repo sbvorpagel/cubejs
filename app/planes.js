@@ -5,10 +5,10 @@
 function startViews(cubes){
   this.cubes = cubes;
 
-  var CENTER_X = 290;
-  var CENTER_Y = 183;
-  var CENTER_Z = 183;
-
+  var CENTER_X = 315;
+  var CENTER_Y = 163;
+  var CENTER_Z = 163;
+  var JUMP     = 30;
   getCubes = function(){
     return this.cubes;
   }
@@ -18,12 +18,12 @@ function startViews(cubes){
    each cube to find the closest one. THe closest one is the one selected by the user.
   */
   getDistance = function (cubes,click){
-    var objects = cubes;  // List of cubes
-    var point = click;    // Point clicked on screen
-    var dist;             // Distance calulated between point and center of a cube
-    var smallest = 999;   // Smallest distance found
-    var listIndex =0;     // Index of the list where the cube is stored
-    var objectIndex = 0;  // Index of the object
+    var objects     = cubes; // List of cubes
+    var point       = click; // Point clicked on screen
+    var select      = false; // Distance calulated between point and center of a cube
+    var smallest    = 999;   // Smallest distance found
+    var listIndex   = 0;     // Index of the list where the cube is stored
+    var objectIndex = 0;     // Index of the object
     var center;
 
     for(var i = 0; i < objects.length; i++){
@@ -31,23 +31,21 @@ function startViews(cubes){
 
       for(var j = 0; j < list.length; j++){
         center = list[j].getCenter();
-        objectIndex = j;
 
-        // Euclidian distance
-        dist = Math.sqrt(
-          Math.pow(point[0] - center[0], 2) + Math.pow(point[1] - center[1], 2)
-        );
-
-        // Checks if is the smallest distance so far
-        if(dist < smallest){
-          smallest = dist;
-          listIndex = i;
-          objectIndex = j;
+        if((click[0] <= (center[0] + JUMP)) && (click[0] >= (center[0] - JUMP))){
+          console.log("Passou X!");
+          if((click[1] <= (center[1] + JUMP)) && (click[1] >= (center[1] - JUMP))){
+            listIndex = i;
+            objectIndex = j;
+            select = true;
+          }
         }
       }
     }
-
-    return [listIndex, objectIndex]
+    if(select)
+      return [listIndex,objectIndex];
+    else
+      false;
   }
   // Canvas that shows (x,y) coordinates (parallel projection)
   var xy = document.getElementById("view_xy");
@@ -84,7 +82,8 @@ function startViews(cubes){
 
   //Adiciona a função click apenas no canvas, xy retorna 1
   xy.addEventListener('click', function(event) {
-    var click = [event.x, event.y];
+    var rect = xy.getBoundingClientRect();
+    var click = [event.x - rect.left, event.y - rect.top];
     var indexes = [];
     cubes = getCubes();
     /*var cube = new Cube();

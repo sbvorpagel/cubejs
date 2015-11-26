@@ -43,8 +43,6 @@ function drawObjects(cubes, canvas,selected) {
           if(select){
             if((select[0] == j) && (select[1] == x)){
               ctxy.strokeStyle="#2E9AFE";
-              console.log(j,x);
-              console.log(select[0],select[1]);
             }
           }
 
@@ -69,7 +67,7 @@ function drawObjects(cubes, canvas,selected) {
         var cube = cubes[x];
         for (var i = 0; i < 6; i++) {
           var f = cube.faces[i];
-          ctxz.strokeStyle="#FF0000";
+          ctxz.strokeStyle="#000000";
           ctxz.beginPath();
           ctxz.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].z);
           ctxz.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].z);
@@ -90,7 +88,7 @@ function drawObjects(cubes, canvas,selected) {
         var cube = cubes[x];
         for (var i = 0; i < 6; i++) {
           var f = cube.faces[i];
-          ctxz.strokeStyle="#FF0000";
+          ctxz.strokeStyle="#000000";
           ctzy.beginPath();
           ctzy.moveTo(cube.vertices[[f[0]]].z , cube.vertices[[f[0]]].y);
           ctzy.lineTo(cube.vertices[[f[1]]].z, cube.vertices[[f[1]]].y);
