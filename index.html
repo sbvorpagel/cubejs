@@ -1,39 +1,88 @@
-<head>
-  <title>Cubejs</title>
-  <script src="app/vertex.js"></script>
-  <script src="app/cube.js"></script>
-  <script src="app/objects.js"></script>
-  <script src="app/graphics.js"></script>
-  <script src="app/draw.js"></script>
-  <script src="app/planes.js"></script>
-  <script src="app/app.js"></script>
-</head>
-<body>
-  <table border="1">
-    <tr>
-      <td>
-        <canvas id="view_xy" width="580" height="367">
-          Your browser does not support the HTML5 canvas element.
-        </canvas>
-      </td>
-      <td>
-        <canvas id="view_xz" width="580" height="367">
-          Your browser does not support the HTML5 canvas element.
-        </canvas>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <canvas id="view_zy" width="580" height="367">
-          Your browser does not support the HTML5 canvas element.
-        </canvas>
-      </td>
-      <td>
-       <canvas id="view" width="580" height="367">
-          Your browser does not support the HTML5 canvas element.
-        </canvas>
-      </td>
-    </tr>
-  </table>
-</body>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cubejs</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="app/vertex.js"></script>
+    <script src="app/cube.js"></script>
+    <script src="app/objects.js"></script>
+    <script src="app/graphics.js"></script>
+    <script src="app/draw.js"></script>
+    <script src="app/planes.js"></script>
+    <script src="app/app.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://sbvorpagel.github.io/cubejs">CubeJS</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#"><i class="fa fa-save fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-folder-open fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-cube fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-hand-pointer-o fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-cubes fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-arrows fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-rotate-left fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-arrows-h fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-trash fa-2x"></i></a></li>
+            <li><a href="http://github.com/sbvorpagel/cubejs"><i class="fa fa-github fa-2x"></i></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+      <div>
+        <center>
+          <row class="col-md-12">
+            <div class="col-md-6">
+              <canvas class="canvas" id="view_xy" width="631" height="327">
+                Your browser does not support the HTML5 canvas element.
+              </canvas>
+            </div>
+
+            <div class="col-md-6">
+              <canvas class="canvas" id="view_xz" width="631" height="327">
+                Your browser does not support the HTML5 canvas element.
+              </canvas>
+            </div>
+
+            <div class="col-md-6">
+              <canvas class="canvas" id="view_zy" width="631" height="327">
+                Your browser does not support the HTML5 canvas element.
+              </canvas>
+            </div>
+
+            <div class="col-md-6">
+             <canvas class="canvas" id="view" width="631" height="327">
+                Your browser does not support the HTML5 canvas element.
+              </canvas>
+            </div>
+
+          </row>
+        </center>
+      </div>
+
+  </body>
 </html>
