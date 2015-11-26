@@ -12,6 +12,43 @@ function startViews(cubes){
   getCubes = function(){
     return this.cubes;
   }
+
+  /*
+   Calculate the distance between a pointe clicked by the user and the center of each
+   each cube to find the closest one. THe closest one is the one selected by the user.
+  */
+  getDistance = function (cubes,click){
+    var objects = cubes;  // List of cubes
+    var point = click;    // Point clicked on screen
+    var dist;             // Distance calulated between point and center of a cube
+    var smallest = 999;   // Smallest distance found
+    var listIndex =0;     // Index of the list where the cube is stored
+    var objectIndex = 0;  // Index of the object
+    var center;
+
+    for(var i = 0; i < objects.length; i++){
+      list = objects[i].getObjects();
+
+      for(var j = 0; j < list.length; j++){
+        center = list[j].getCenter();
+        objectIndex = j;
+
+        // Euclidian distance
+        dist = Math.sqrt(
+          Math.pow(point[0] - center[0], 2) + Math.pow(point[1] - center[1], 2)
+        );
+
+        // Checks if is the smallest distance so far
+        if(dist < smallest){
+          smallest = dist;
+          listIndex = i;
+          objectIndex = j;
+        }
+      }
+    }
+
+    return [listIndex, objectIndex]
+  }
   // Canvas that shows (x,y) coordinates (parallel projection)
   var xy = document.getElementById("view_xy");
     if (xy && xy.getContext) {
@@ -47,6 +84,8 @@ function startViews(cubes){
 
   //Adiciona a função click apenas no canvas, xy retorna 1
   xy.addEventListener('click', function(event) {
+    var click = [event.x, event.y];
+    var indexes = [];
     cubes = getCubes();
     /*var cube = new Cube();
     var rect = xy.getBoundingClientRect();
@@ -55,14 +94,15 @@ function startViews(cubes){
     list.addObjects(cube)
     cubes.addObjects(list);
     drawObjects(cubes,canvas);*/
-    getDistance(cubes);
+    indexes = getDistance(cubes.getObjects(), click);
+    drawObjects(cubes,canvas,indexes)
   });
 
-  xz.addEventListener('mousedown', function(event){
-    if(event.which == 1){
+  xz.addEventListener('click', function(event){
+    /*if(event.which == 1){
       addEventListener('mousemove',moved)
       event.preventDefault();
-    }
+    }*/
 
     cubes = getCubes();
     var cube = new Cube();
@@ -98,15 +138,5 @@ function startViews(cubes){
       console.log("Parou!");
     else
     console.log("Desclique:",event.clientX, event.clientY);
-  }
-
-  getDistance = function (cubes){
-    var dist;
-    var smallest;
-    var index;
-    
-    for(var i = 0; i < cubes.length; i++){
-      console.log(cubes[i]);
-    }
   }
 }

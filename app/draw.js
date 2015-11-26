@@ -6,10 +6,11 @@
               canvas - a list of all the created canvas
 */
 
-function drawObjects(cubes, canvas) {
+function drawObjects(cubes, canvas,selected) {
 
   this.cubes  = cubes;
   this.canvas = canvas;
+  this.indexes = selected;
 
   /*
     Used to access this.cubes ince we can't access this.cubes
@@ -19,16 +20,34 @@ function drawObjects(cubes, canvas) {
     return this.cubes.getObjects()
   }
 
+  isSelected = function(){
+    if(Array.isArray(this.indexes))
+      return this.indexes;
+    else
+      return false;
+  }
+
   // Draws the objects on the xy canvas
   drawXY = function() {
-    var list = getList();
+    var list   = getList();
+    var select = isSelected();
+
     for(var j = 0; j < list.length; j++){
       var cubes = list[j].getObjects();
       for (var x = 0; x < cubes.length; x++) {
         var cube = cubes[x];
         for (var i = 0; i < 6; i++) {
           var f = cube.faces[i];
-          ctxy.strokeStyle="#FF0000";
+          ctxy.strokeStyle="#000000";
+
+          if(select){
+            if((select[0] == j) && (select[1] == x)){
+              ctxy.strokeStyle="#2E9AFE";
+              console.log(j,x);
+              console.log(select[0],select[1]);
+            }
+          }
+
           ctxy.beginPath();
           ctxy.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].y);
           ctxy.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].y);
