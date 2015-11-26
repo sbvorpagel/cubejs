@@ -5,6 +5,10 @@
 function startViews(cubes){
   this.cubes = cubes;
 
+  var CENTER_X = 290;
+  var CENTER_Y = 183;
+  var CENTER_Z = 183;
+
   getCubes = function(){
     return this.cubes;
   }
@@ -46,7 +50,7 @@ function startViews(cubes){
     cubes = getCubes();
     var cube = new Cube();
     var rect = xy.getBoundingClientRect();
-    cube.createCube(event.x, event.y, 0);
+    cube.createCube(event.x, event.y, CENTER_Z);
     cubes.addObjects(cube);
     drawObjects(cubes,canvas);
   });
@@ -60,7 +64,7 @@ function startViews(cubes){
     cubes = getCubes();
     var cube = new Cube();
     var rect = xz.getBoundingClientRect();
-    cube.createCube(event.x - rect.left, 0 ,event.y - rect.top);
+    cube.createCube(event.x - rect.left, CENTER_Y ,event.y - rect.top);
     cubes.addObjects(cube);
     drawObjects(cubes,canvas);
   });
@@ -68,8 +72,9 @@ function startViews(cubes){
   zy.addEventListener('click', function(event) {
     cubes = getCubes();
     var cube = new Cube();
-    var rect = xy.getBoundingClientRect();
-    cube.createCube(0, event.x - rect.left, event.y - rect.top);
+    var rect = zy.getBoundingClientRect();
+    console.log(rect.top);
+    cube.createCube(CENTER_X, event.y - rect.top, event.x);
     cubes.addObjects(cube);
     drawObjects(cubes,canvas);
   });
