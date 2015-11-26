@@ -16,63 +16,70 @@ function drawObjects(cubes, canvas) {
     directly from the drawing functions.
   */
   getList = function(){
-    return this.cubes.getObjects();
+    return this.cubes.getObjects()
   }
 
   // Draws the objects on the xy canvas
   drawXY = function() {
-    var cubes = getList();
-    for (var x = 0; x < cubes.length; x++) {
-      var cube = cubes[x];
-      console.log(cube.getCenter());
-      for (var i = 0; i < 6; i++) {
-        var f = cube.faces[i];
-        ctxy.strokeStyle="#FF0000";
-        ctxy.beginPath();
-        ctxy.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].y);
-        ctxy.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].y);
-        ctxy.lineTo(cube.vertices[[f[2]]].x, cube.vertices[[f[2]]].y);
-        ctxy.lineTo(cube.vertices[[f[3]]].x, cube.vertices[[f[3]]].y);
-        ctxy.closePath();
-        ctxy.stroke();
+    var list = getList();
+    for(var j = 0; j < list.length; j++){
+      var cubes = list[j].getObjects();
+      for (var x = 0; x < cubes.length; x++) {
+        var cube = cubes[x];
+        for (var i = 0; i < 6; i++) {
+          var f = cube.faces[i];
+          ctxy.strokeStyle="#FF0000";
+          ctxy.beginPath();
+          ctxy.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].y);
+          ctxy.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].y);
+          ctxy.lineTo(cube.vertices[[f[2]]].x, cube.vertices[[f[2]]].y);
+          ctxy.lineTo(cube.vertices[[f[3]]].x, cube.vertices[[f[3]]].y);
+          ctxy.closePath();
+          ctxy.stroke();
+        }
       }
     }
   }
 
   // Draws the objects on the xz canvas
   drawXZ = function () {
-    var cubes = getList();
-    for (var x = 0; x < cubes.length; x++) {
-      var cube = cubes[x];
-      for (var i = 0; i < 6; i++) {
-        var f = cube.faces[i];
-        ctxz.strokeStyle="#FF0000";
-        ctxz.beginPath();
-        ctxz.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].z);
-        ctxz.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].z);
-        ctxz.lineTo(cube.vertices[[f[2]]].x, cube.vertices[[f[2]]].z);
-        ctxz.lineTo(cube.vertices[[f[3]]].x, cube.vertices[[f[3]]].z);
-        ctxz.closePath();
-        ctxz.stroke();
+    var list = getList();
+    for(var j = 0; j < list.length; j++){
+      var cubes = list[j].getObjects();
+      for (var x = 0; x < cubes.length; x++) {
+        var cube = cubes[x];
+        for (var i = 0; i < 6; i++) {
+          var f = cube.faces[i];
+          ctxz.strokeStyle="#FF0000";
+          ctxz.beginPath();
+          ctxz.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].z);
+          ctxz.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].z);
+          ctxz.lineTo(cube.vertices[[f[2]]].x, cube.vertices[[f[2]]].z);
+          ctxz.lineTo(cube.vertices[[f[3]]].x, cube.vertices[[f[3]]].z);
+          ctxz.closePath();
+          ctxz.stroke();
+        }
       }
     }
   }
   // Draws the objects on the zy canvas
   drawZY = function () {
-    var cubes = getList();
-    for (var x = 0; x < cubes.length; x++) {
-      var cube = cubes[x];
-      console.log(cube.getCenter());
-      for (var i = 0; i < 6; i++) {
-        var f = cube.faces[i];
-        ctxz.strokeStyle="#FF0000";
-        ctzy.beginPath();
-        ctzy.moveTo(cube.vertices[[f[0]]].z , cube.vertices[[f[0]]].y);
-        ctzy.lineTo(cube.vertices[[f[1]]].z, cube.vertices[[f[1]]].y);
-        ctzy.lineTo(cube.vertices[[f[2]]].z, cube.vertices[[f[2]]].y);
-        ctzy.lineTo(cube.vertices[[f[3]]].z, cube.vertices[[f[3]]].y);
-        ctzy.closePath();
-        ctzy.stroke();
+    var list = getList();
+    for(var j = 0; j < list.length; j++){
+      var cubes = list[j].getObjects();
+      for (var x = 0; x < cubes.length; x++) {
+        var cube = cubes[x];
+        for (var i = 0; i < 6; i++) {
+          var f = cube.faces[i];
+          ctxz.strokeStyle="#FF0000";
+          ctzy.beginPath();
+          ctzy.moveTo(cube.vertices[[f[0]]].z , cube.vertices[[f[0]]].y);
+          ctzy.lineTo(cube.vertices[[f[1]]].z, cube.vertices[[f[1]]].y);
+          ctzy.lineTo(cube.vertices[[f[2]]].z, cube.vertices[[f[2]]].y);
+          ctzy.lineTo(cube.vertices[[f[3]]].z, cube.vertices[[f[3]]].y);
+          ctzy.closePath();
+          ctzy.stroke();
+        }
       }
     }
   }

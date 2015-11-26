@@ -48,11 +48,14 @@ function startViews(cubes){
   //Adiciona a função click apenas no canvas, xy retorna 1
   xy.addEventListener('click', function(event) {
     cubes = getCubes();
-    var cube = new Cube();
+    /*var cube = new Cube();
     var rect = xy.getBoundingClientRect();
+    var list = new Objects();
     cube.createCube(event.x, event.y, CENTER_Z);
-    cubes.addObjects(cube);
-    drawObjects(cubes,canvas);
+    list.addObjects(cube)
+    cubes.addObjects(list);
+    drawObjects(cubes,canvas);*/
+    getDistance(cubes);
   });
 
   xz.addEventListener('mousedown', function(event){
@@ -64,8 +67,10 @@ function startViews(cubes){
     cubes = getCubes();
     var cube = new Cube();
     var rect = xz.getBoundingClientRect();
+    var list = new Objects();
     cube.createCube(event.x - rect.left, CENTER_Y ,event.y - rect.top);
-    cubes.addObjects(cube);
+    list.addObjects(cube)
+    cubes.addObjects(list);
     drawObjects(cubes,canvas);
   });
 
@@ -73,9 +78,10 @@ function startViews(cubes){
     cubes = getCubes();
     var cube = new Cube();
     var rect = zy.getBoundingClientRect();
-    console.log(rect.top);
+    var list = new Objects();
     cube.createCube(CENTER_X, event.y - rect.top, event.x);
-    cubes.addObjects(cube);
+    list.addObjects(cube);
+    cubes.addObjects(list);
     drawObjects(cubes,canvas);
   });
 
@@ -92,5 +98,15 @@ function startViews(cubes){
       console.log("Parou!");
     else
     console.log("Desclique:",event.clientX, event.clientY);
+  }
+
+  getDistance = function (cubes){
+    var dist;
+    var smallest;
+    var index;
+    
+    for(var i = 0; i < cubes.length; i++){
+      console.log(cubes[i]);
+    }
   }
 }
