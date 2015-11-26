@@ -8,7 +8,7 @@
 
 function drawObjects(cubes, canvas) {
 
-  this.cubes = cubes;
+  this.cubes  = cubes;
   this.canvas = canvas;
 
   /*
@@ -24,6 +24,7 @@ function drawObjects(cubes, canvas) {
     var cubes = getList();
     for (var x = 0; x < cubes.length; x++) {
       var cube = cubes[x];
+      console.log(cube.getCenter());
       for (var i = 0; i < 6; i++) {
         var f = cube.faces[i];
         ctxy.strokeStyle="#FF0000";
@@ -61,14 +62,15 @@ function drawObjects(cubes, canvas) {
     var cubes = getList();
     for (var x = 0; x < cubes.length; x++) {
       var cube = cubes[x];
+      console.log(cube.getCenter());
       for (var i = 0; i < 6; i++) {
         var f = cube.faces[i];
         ctxz.strokeStyle="#FF0000";
         ctzy.beginPath();
-        ctzy.moveTo(cube.vertices[[f[0]]].y, cube.vertices[[f[0]]].z);
-        ctzy.lineTo(cube.vertices[[f[1]]].y, cube.vertices[[f[1]]].z);
-        ctzy.lineTo(cube.vertices[[f[2]]].y, cube.vertices[[f[2]]].z);
-        ctzy.lineTo(cube.vertices[[f[3]]].y, cube.vertices[[f[3]]].z);
+        ctzy.moveTo(cube.vertices[[f[0]]].z , cube.vertices[[f[0]]].y);
+        ctzy.lineTo(cube.vertices[[f[1]]].z, cube.vertices[[f[1]]].y);
+        ctzy.lineTo(cube.vertices[[f[2]]].z, cube.vertices[[f[2]]].y);
+        ctzy.lineTo(cube.vertices[[f[3]]].z, cube.vertices[[f[3]]].y);
         ctzy.closePath();
         ctzy.stroke();
       }

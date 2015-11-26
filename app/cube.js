@@ -97,4 +97,8 @@ function Cube() {
     return n_normal;
   }
 
+  // Returns the center of the Cube
+  this.getCenter = function(){
+    return this.center
+  }
 }
