@@ -1,3 +1,9 @@
+/*
+  Defines the geometric transformations
+  that can be applied to the objects created
+  by the user.
+*/
+
 var PI = Math.acos(-1);
 var CENTER_X = 290;
 var CENTER_Y = 183;

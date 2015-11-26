@@ -53,7 +53,6 @@ function Cube() {
     this.c = c
   }
 
-
   //Transform a list of vertices into a matrix
   this.cube2matrix = function () {
     var matrix = [];
