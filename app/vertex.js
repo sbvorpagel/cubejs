@@ -8,12 +8,6 @@ function Vertex(x, y, z) {
   this.y = y;
   this.z = z;
 
-  this.updateVertex = function(x, y, z){
-    this.x = x;
-    this.y = y;
-    this.z = z;
-  }
-
   this.vertex2array = function () {
     return [this.x, this.y, this.z, 1];
   }
