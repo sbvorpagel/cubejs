@@ -11,7 +11,7 @@
    - 1 center
 */
 
-var JUMP = 50;
+var JUMP = 30;
 
 function Cube() {
   this.c;
