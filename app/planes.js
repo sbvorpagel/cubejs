@@ -3,44 +3,86 @@
   view planes.
 */
 
+var BUTTON_CUBE = false;
+var BUTTON_SELECT = false;
+var BUTTON_CUBES = false;
+var BUTTON_MOVE = false;
+var BUTTON_ROTATION = false;
+var BUTTON_SCALE = false;
+var BUTTON_VISIBLE = false;
+var BUTTON_DELETE = false;
+
+
 function button_save() {
   console.log("Click no salvar");
 }
 
 function button_open() {
-  console.log("Click no abrir");
+
 }
 
 function button_cube() {
-  console.log("Click no cubo");
+  if (BUTTON_CUBE == false)
+    BUTTON_CUBE = true;
+  else
+    BUTTON_CUBE = false;
+    console.log("Select", BUTTON_CUBE);
 }
 
 function button_select() {
-  console.log("Click no selecionar");
+  if (BUTTON_SELECT == false)
+    BUTTON_SELECT = true;
+  else
+    BUTTON_SELECT = false;
+    console.log("Select", BUTTON_SELECT);
 }
 
 function button_cubes() {
-  console.log("Click nos cubos");
+  if (BUTTON_CUBES == false)
+    BUTTON_CUBES = true;
+  else
+    BUTTON_CUBES = false;
+    console.log("CUBES", BUTTON_CUBES);
 }
 
 function button_move() {
-  console.log("Click no translate");
+  if (BUTTON_MOVE == false)
+    BUTTON_MOVE = true;
+  else
+    BUTTON_MOVE = false;
+    console.log("MOVE", BUTTON_MOVE);
 }
 
 function button_rotation() {
-  console.log("Click na rotação");
+  if (BUTTON_ROTATION == false)
+    BUTTON_ROTATION = true;
+  else
+    BUTTON_ROTATION = false;
+    console.log("ROTATION", BUTTON_ROTATION);
 }
 
 function button_scale() {
-  console.log("Click na escala");
+  if (BUTTON_SCALE == false)
+    BUTTON_SCALE = true;
+  else
+    BUTTON_SCALE = false;
+    console.log("SCALE", BUTTON_SCALE);
 }
 
 function button_visible() {
-  console.log("Click na ocutação de face");
+  if (BUTTON_VISIBLE == false)
+    BUTTON_VISIBLE = true;
+  else
+    BUTTON_VISIBLE = false;
+    console.log("VISIBLE", BUTTON_VISIBLE);
 }
 
 function button_delete() {
-  console.log("Click no Delete");
+  if (BUTTON_DELETE == false)
+    BUTTON_DELETE = true;
+  else
+    BUTTON_DELETE = false;
+    console.log("DELETE", BUTTON_DELETE);
 }
 
 function startViews(cubes){
