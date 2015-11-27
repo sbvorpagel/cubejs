@@ -21,4 +21,19 @@ function Objects() {
   this.getObjects= function() {
     return this.objects;
   }
+
+  this.to_file = function() {
+    var str = "";
+    str += this.objects.length + "\n";
+    for (var i = 0; i < this.objects.length; i++) {
+      str += this.objects[i].length + "\n";
+      for (var j = 0; j < this.objects.length; j++) {
+      /*  str += "\n"
+        str += this.objects[i][j].cube2matrix() + "\n" +
+               this.objects[i][j].vertex + "\n";
+        str += "\n"*/
+        console.log(this.objects[i][j]);
+      }
+    }
+  }
 }

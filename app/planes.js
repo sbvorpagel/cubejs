@@ -3,6 +3,8 @@
   view planes.
 */
 
+var CUBES; //VAR TEST PARA TESTAR O SAVE, ACREDITO QUE ELA TERÁ QUE EXISTIR,
+           //NO FUNDO ELA É EXATAMENTE IGUAL AO THIS.CUBES
 var BUTTON_CUBE = false;
 var BUTTON_SELECT = false;
 var BUTTON_CUBES = false;
@@ -12,81 +14,9 @@ var BUTTON_SCALE = false;
 var BUTTON_VISIBLE = false;
 var BUTTON_DELETE = false;
 
-
-function button_save() {
-  console.log("Click no salvar");
-}
-
-function button_open() {
-
-}
-
-function button_cube() {
-  if (BUTTON_CUBE == false)
-    BUTTON_CUBE = true;
-  else
-    BUTTON_CUBE = false;
-    console.log("Select", BUTTON_CUBE);
-}
-
-function button_select() {
-  if (BUTTON_SELECT == false)
-    BUTTON_SELECT = true;
-  else
-    BUTTON_SELECT = false;
-    console.log("Select", BUTTON_SELECT);
-}
-
-function button_cubes() {
-  if (BUTTON_CUBES == false)
-    BUTTON_CUBES = true;
-  else
-    BUTTON_CUBES = false;
-    console.log("CUBES", BUTTON_CUBES);
-}
-
-function button_move() {
-  if (BUTTON_MOVE == false)
-    BUTTON_MOVE = true;
-  else
-    BUTTON_MOVE = false;
-    console.log("MOVE", BUTTON_MOVE);
-}
-
-function button_rotation() {
-  if (BUTTON_ROTATION == false)
-    BUTTON_ROTATION = true;
-  else
-    BUTTON_ROTATION = false;
-    console.log("ROTATION", BUTTON_ROTATION);
-}
-
-function button_scale() {
-  if (BUTTON_SCALE == false)
-    BUTTON_SCALE = true;
-  else
-    BUTTON_SCALE = false;
-    console.log("SCALE", BUTTON_SCALE);
-}
-
-function button_visible() {
-  if (BUTTON_VISIBLE == false)
-    BUTTON_VISIBLE = true;
-  else
-    BUTTON_VISIBLE = false;
-    console.log("VISIBLE", BUTTON_VISIBLE);
-}
-
-function button_delete() {
-  if (BUTTON_DELETE == false)
-    BUTTON_DELETE = true;
-  else
-    BUTTON_DELETE = false;
-    console.log("DELETE", BUTTON_DELETE);
-}
-
 function startViews(cubes){
   this.cubes = cubes;
+  CUBES = cubes;
 
   var CENTER_X = 315;
   var CENTER_Y = 163;
@@ -194,6 +124,9 @@ function startViews(cubes){
     cube.createCube(event.x - rect.left, CENTER_Y ,event.y - rect.top);
     list.addObjects(cube)
     cubes.addObjects(list);
+    console.log(cubes);                                                         // Tirar depois
+    CUBES = cubes;                                                              // ISSO É TESTE TIRAR DEPOIS
+    console.log(CUBES);                                                         // Tirar depois
     drawObjects(cubes,canvas);
   });
 
@@ -205,6 +138,9 @@ function startViews(cubes){
     cube.createCube(CENTER_X, event.y - rect.top, event.x);
     list.addObjects(cube);
     cubes.addObjects(list);
+    console.log(cubes);                                                         // Tirar depois
+    CUBES = cubes;                                                              // ISSO É TESTE TIRAR DEPOIS
+    console.log(CUBES);                                                         // Tirar depois
     drawObjects(cubes,canvas);
   });
 
@@ -222,4 +158,86 @@ function startViews(cubes){
     else
     console.log("Desclique:",event.clientX, event.clientY);
   }
+}
+
+
+// DAQUI PARA BAIXO PROVAVEL QUE NÃO DEVERIA ESTAR AQUI, DEPOIS DE
+//TESTAR IREI REMOVER.
+
+
+function button_save(name, type) {
+  var a = document.createElement("a");
+  var file = new Blob([CUBES.to_file()], {type: type});
+  a.href = URL.createObjectURL(file);
+  a.download = name;
+  a.click();
+ }
+
+
+function button_open() {
+
+}
+
+function button_cube() {
+  if (BUTTON_CUBE == false)
+    BUTTON_CUBE = true;
+  else
+    BUTTON_CUBE = false;
+    console.log("Select", BUTTON_CUBE);
+}
+
+function button_select() {
+  if (BUTTON_SELECT == false)
+    BUTTON_SELECT = true;
+  else
+    BUTTON_SELECT = false;
+    console.log("Select", BUTTON_SELECT);
+}
+
+function button_cubes() {
+  if (BUTTON_CUBES == false)
+    BUTTON_CUBES = true;
+  else
+    BUTTON_CUBES = false;
+    console.log("CUBES", BUTTON_CUBES);
+}
+
+function button_move() {
+  if (BUTTON_MOVE == false)
+    BUTTON_MOVE = true;
+  else
+    BUTTON_MOVE = false;
+    console.log("MOVE", BUTTON_MOVE);
+}
+
+function button_rotation() {
+  if (BUTTON_ROTATION == false)
+    BUTTON_ROTATION = true;
+  else
+    BUTTON_ROTATION = false;
+    console.log("ROTATION", BUTTON_ROTATION);
+}
+
+function button_scale() {
+  if (BUTTON_SCALE == false)
+    BUTTON_SCALE = true;
+  else
+    BUTTON_SCALE = false;
+    console.log("SCALE", BUTTON_SCALE);
+}
+
+function button_visible() {
+  if (BUTTON_VISIBLE == false)
+    BUTTON_VISIBLE = true;
+  else
+    BUTTON_VISIBLE = false;
+    console.log("VISIBLE", BUTTON_VISIBLE);
+}
+
+function button_delete() {
+  if (BUTTON_DELETE == false)
+    BUTTON_DELETE = true;
+  else
+    BUTTON_DELETE = false;
+    console.log("DELETE", BUTTON_DELETE);
 }

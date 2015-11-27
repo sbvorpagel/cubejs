@@ -40,7 +40,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a onclick="button_save()" title="Save"><i class="fa fa-save fa-2x"></i></a></li>
+            <li><a id="button_save_id" onclick="button_save(prompt('Please enter the file name to be saved.', 'file.cj'), 'text/plain')" title="Save"><i class="fa fa-save fa-2x"></i></a></li>
             <li><a type="file" onchange="button_open()" title="Open"><i id="button_button_id" class="fa fa-folder-open fa-2x"></i></a></li>
             <li><a onclick="button_cube()" title="Create Cube"><i id="button_cube_id" class="fa fa-cube fa-2x"></i></a></li>
             <li><a onclick="button_select()" title="Select Cube"><i class="fa fa-hand-pointer-o fa-2x"></i></a></li>
