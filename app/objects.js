@@ -26,14 +26,13 @@ function Objects() {
     var str = "";
     str += this.objects.length + "\n";
     for (var i = 0; i < this.objects.length; i++) {
-      str += this.objects[i].length + "\n";
-      for (var j = 0; j < this.objects.length; j++) {
-      /*  str += "\n"
-        str += this.objects[i][j].cube2matrix() + "\n" +
-               this.objects[i][j].vertex + "\n";
-        str += "\n"*/
-        console.log(this.objects[i][j]);
+      str += this.objects[i].getObjects().length + "\n";
+      for (var j = 0; j < this.objects[i].getObjects().length; j++) {
+        str += this.objects[i].getObjects()[j].cube2matrix() + "\n" +
+               this.objects[i].getObjects()[j].faces + "\n";
+        str += "\n"
       }
     }
+    return str;
   }
 }

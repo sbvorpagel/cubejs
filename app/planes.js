@@ -125,7 +125,7 @@ function startViews(cubes){
     list.addObjects(cube)
     cubes.addObjects(list);
     console.log(cubes);                                                         // Tirar depois
-    CUBES = cubes;                                                              // ISSO É TESTE TIRAR DEPOIS
+    CUBES = cubes;                                                              // ISSO É TESTE TIRAR DEPOIS MAS PARA TIRAR ISSO TEM QUE TER UM CUBES GLOBAL
     console.log(CUBES);                                                         // Tirar depois
     drawObjects(cubes,canvas);
   });
@@ -138,9 +138,7 @@ function startViews(cubes){
     cube.createCube(CENTER_X, event.y - rect.top, event.x);
     list.addObjects(cube);
     cubes.addObjects(list);
-    console.log(cubes);                                                         // Tirar depois
-    CUBES = cubes;                                                              // ISSO É TESTE TIRAR DEPOIS
-    console.log(CUBES);                                                         // Tirar depois
+    CUBES = cubes;                                                              // ISSO É TESTE TIRAR DEPOIS MAS PARA TIRAR ISSO TEM QUE TER UM CUBES GLOBAL
     drawObjects(cubes,canvas);
   });
 
@@ -166,6 +164,7 @@ function startViews(cubes){
 
 
 function button_save(name, type) {
+  console.log(CUBES);
   var a = document.createElement("a");
   var file = new Blob([CUBES.to_file()], {type: type});
   a.href = URL.createObjectURL(file);
