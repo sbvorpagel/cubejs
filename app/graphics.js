@@ -33,6 +33,9 @@ function translation (x, y, z, cubes) {
       cube[i][1] = cube[i][1] + y;
       cube[i][2] = cube[i][2] + z;
     }
+    cubes[c].center[0] = cubes[c].center[0] + x;
+    cubes[c].center[1] = cubes[c].center[1] + y;
+    cubes[c].center[2] = cubes[c].center[2] + z;
     cubes[c].matrix2cube(cube);
   }
   return cubes;

@@ -7,6 +7,7 @@ var canvas = [];
 
 //Global Project Vars
 var CUBES = new Objects();
+var SELECTED = [];
 var BUTTON_CUBE = false;
 var BUTTON_SELECT = false;
 var BUTTON_CUBES = false;
@@ -66,11 +67,9 @@ function button_cubes() {
 }
 
 function button_move() {
-  if (BUTTON_MOVE == false)
-    BUTTON_MOVE = true;
-  else
-    BUTTON_MOVE = false;
-    console.log("MOVE", BUTTON_MOVE);
+  set_all_false();
+  BUTTON_MOVE = true;
+  menu_state();
 }
 
 function button_rotation() {

@@ -3,6 +3,7 @@
   view planes.
 */
 
+var indexes = [];
 
 function startViews(){
   xy = document.getElementById("view_xy");
@@ -41,7 +42,7 @@ function startViews(){
  Calculate the distance between a pointe clicked by the user and the center of each
  each cube to find the closest one. THe closest one is the one selected by the user.
 */
-getDistance = function (cubes,click){
+getDistance = function (cubes, click){
   var objects     = cubes; // List of cubes
   var point       = click; // Point clicked on screen
   var select      = false; // Distance calulated between point and center of a cube
@@ -66,10 +67,12 @@ getDistance = function (cubes,click){
       }
     }
   }
-  if(select)
-    return [listIndex,objectIndex];
-  else
+  if(select) {
+    SELECTED.push(objects[objectIndex]);
+    return [listIndex, objectIndex];
+  } else {
     false;
+  }
 }
 
 function create_cube_xy(event) {
@@ -113,7 +116,6 @@ function select_cube_xy(event) {
 function select_cube_xz(event) {
   var rect = xz.getBoundingClientRect();
   var click = [event.x - rect.left, event.y - rect.top];
-  var indexes = [];
   indexes = getDistance(CUBES.getObjects(), click);
   drawObjects(CUBES,canvas,indexes)
 }
@@ -126,6 +128,40 @@ function select_cube_zy(event) {
   drawObjects(CUBES,canvas,indexes)
 }
 
+
+var iX, iY, iZ;
+
+function xyMove(e){
+  var rect = xy.getBoundingClientRect();
+  var x, y, z;
+  if (dragok) {
+    x = e.x - rect.left;
+    y = e.y - rect.top;
+    z = CENTER_Z;
+  }
+  translation(x-iX, y-iY, iZ, SELECTED[0].getObjects());
+  iX = x;
+  iY = y;
+  iZ = 0;
+  drawObjects(CUBES,canvas,indexes)
+}
+
+function xyDown(e){
+  var rect = xy.getBoundingClientRect();
+  iX = e.x - rect.left;
+  iY = e.y - rect.top;
+  iZ = CENTER_Z;
+  dragok = true;
+  xy.addEventListener('mousemove', xyMove, false);
+}
+
+function xyUp(){
+ dragok = false;
+ xy.removeEventListener('mousemove', xyMove, false);
+ console.log("sortei");
+}
+
+
 function menu_state () {
   //remove create cube
   xy.removeEventListener('click', create_cube_xy, false);
@@ -135,6 +171,9 @@ function menu_state () {
   xy.removeEventListener('click', select_cube_xy, false);
   xz.removeEventListener('click', select_cube_xz, false);
   zy.removeEventListener('click', select_cube_zy, false);
+
+  xy.removeEventListener('mousedown', xyDown, false);
+  xy.removeEventListener('mouseup', xyUp, false);
 
   if (BUTTON_CUBE) {
     xy.addEventListener('click', create_cube_xy, false);
@@ -146,6 +185,11 @@ function menu_state () {
     xy.addEventListener('click', select_cube_xy, false);
     xz.addEventListener('click', select_cube_xz, false);
     zy.addEventListener('click', select_cube_zy, false);
+  }
+
+  if (BUTTON_MOVE) {
+    xy.addEventListener('mousedown', xyDown, false);
+    xy.addEventListener('mouseup', xyUp, false);
   }
 }
 

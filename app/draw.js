@@ -6,7 +6,7 @@
               canvas - a list of all the created canvas
 */
 
-function drawObjects(cubes, canvas,selected) {
+function drawObjects(cubes, canvas, selected) {
 
   this.cubes  = cubes;
   this.canvas = canvas;
