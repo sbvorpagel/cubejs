@@ -1,3 +1,10 @@
+//Global canvas var
+var xy;
+var zx;
+var zy;
+var view;
+var canvas = [];
+
 //Global Project Vars
 var CUBES = new Objects();
 var BUTTON_CUBE = false;
@@ -14,6 +21,17 @@ var CENTER_Y = 163;
 var CENTER_Z = 163;
 var JUMP     = 30;
 
+function set_all_false() {
+  BUTTON_CUBE = false;
+  BUTTON_SELECT = false;
+  BUTTON_CUBES = false;
+  BUTTON_MOVE = false;
+  BUTTON_ROTATION = false;
+  BUTTON_SCALE = false;
+  BUTTON_VISIBLE = false;
+  BUTTON_DELETE = false;
+}
+
 function button_save(name, type) {
   console.log(CUBES);
   var a = document.createElement("a");
@@ -28,19 +46,15 @@ function button_open() {
 }
 
 function button_cube() {
-  if (BUTTON_CUBE == false)
-    BUTTON_CUBE = true;
-  else
-    BUTTON_CUBE = false;
-    console.log("Select", BUTTON_CUBE);
+  set_all_false();
+  BUTTON_CUBE = true;
+  menu_state();
 }
 
 function button_select() {
-  if (BUTTON_SELECT == false)
-    BUTTON_SELECT = true;
-  else
-    BUTTON_SELECT = false;
-    console.log("Select", BUTTON_SELECT);
+  set_all_false();
+  BUTTON_SELECT = true;
+  menu_state();
 }
 
 function button_cubes() {
@@ -90,6 +104,7 @@ function button_delete() {
     BUTTON_DELETE = false;
     console.log("DELETE", BUTTON_DELETE);
 }
+
 
 
 window.onload = main;

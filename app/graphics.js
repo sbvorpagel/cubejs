@@ -5,9 +5,6 @@
 */
 
 var PI = Math.acos(-1);
-var CENTER_X = 315;
-var CENTER_Y = 163;
-var CENTER_Z = 163;
 
 function multiply(a, b) {
   var aNumRows = a.length, aNumCols = a[0].length,

@@ -60,7 +60,9 @@ function drawObjects(cubes, canvas,selected) {
 
   // Draws the objects on the xz canvas
   drawXZ = function () {
-    var list = getList();
+    var list   = getList();
+    var select = isSelected();
+
     for(var j = 0; j < list.length; j++){
       var cubes = list[j].getObjects();
       for (var x = 0; x < cubes.length; x++) {
@@ -68,6 +70,13 @@ function drawObjects(cubes, canvas,selected) {
         for (var i = 0; i < 6; i++) {
           var f = cube.faces[i];
           ctxz.strokeStyle="#000000";
+
+          if(select){
+            if((select[0] == j) && (select[1] == x)){
+              ctxy.strokeStyle="#2E9AFE";
+            }
+          }
+
           ctxz.beginPath();
           ctxz.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].z);
           ctxz.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].z);
@@ -81,7 +90,9 @@ function drawObjects(cubes, canvas,selected) {
   }
   // Draws the objects on the zy canvas
   drawZY = function () {
-    var list = getList();
+    var list   = getList();
+    var select = isSelected();
+
     for(var j = 0; j < list.length; j++){
       var cubes = list[j].getObjects();
       for (var x = 0; x < cubes.length; x++) {
@@ -89,6 +100,13 @@ function drawObjects(cubes, canvas,selected) {
         for (var i = 0; i < 6; i++) {
           var f = cube.faces[i];
           ctxz.strokeStyle="#000000";
+
+          if(select){
+            if((select[0] == j) && (select[1] == x)){
+              ctzy.strokeStyle="#2E9AFE";
+            }
+          }
+
           ctzy.beginPath();
           ctzy.moveTo(cube.vertices[[f[0]]].z , cube.vertices[[f[0]]].y);
           ctzy.lineTo(cube.vertices[[f[1]]].z, cube.vertices[[f[1]]].y);
