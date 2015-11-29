@@ -128,10 +128,9 @@ function select_cube_zy(event) {
   drawObjects(CUBES,canvas,indexes)
 }
 
-
 var iX, iY, iZ;
 
-function xyMove(e){
+function xyMoveT(e){
   var rect = xy.getBoundingClientRect();
   var x, y, z;
   if (dragok) {
@@ -146,18 +145,50 @@ function xyMove(e){
   drawObjects(CUBES,canvas,indexes)
 }
 
-function xyDown(e){
+function xyDownT(e){
   var rect = xy.getBoundingClientRect();
   iX = e.x - rect.left;
   iY = e.y - rect.top;
   iZ = CENTER_Z;
   dragok = true;
-  xy.addEventListener('mousemove', xyMove, false);
+  xy.addEventListener('mousemove', xyMoveT, false);
 }
 
-function xyUp(){
+function xyUpT(){
  dragok = false;
- xy.removeEventListener('mousemove', xyMove, false);
+ xy.removeEventListener('mousemove', xyMoveT, false);
+ console.log("sortei");
+}
+
+function xyMoveR(e){
+  var rect = xy.getBoundingClientRect();
+  var x, y, z;
+  if (dragok) {
+    x = e.x - rect.left;
+    y = e.y - rect.top;
+    z = CENTER_Z;
+  }
+  if(iX < x) rotation_y(5, SELECTED[0].getObjects());
+  if(iX > x) rotation_y(-5, SELECTED[0].getObjects());
+  if(iY > y) rotation_x(5, SELECTED[0].getObjects());
+  if(iY < y) rotation_x(-5, SELECTED[0].getObjects());
+  iX = x;
+  iY = y;
+  drawObjects(CUBES,canvas,indexes)
+}
+
+function xyDownR(e){
+  var rect = xy.getBoundingClientRect();
+  iX = e.x - rect.left;
+  iY = e.y - rect.top;
+  iZ = CENTER_Z;
+  dragok = true;
+  xy.addEventListener('mousemove', xyMoveR, false);
+}
+
+function xyUpR(){
+ dragok = false;
+ xy.removeEventListener('mousemove', xyMoveR, false);
  console.log("sortei");
 }
 
@@ -171,9 +202,12 @@ function menu_state () {
   xy.removeEventListener('click', select_cube_xy, false);
   xz.removeEventListener('click', select_cube_xz, false);
   zy.removeEventListener('click', select_cube_zy, false);
-
-  xy.removeEventListener('mousedown', xyDown, false);
-  xy.removeEventListener('mouseup', xyUp, false);
+  //Remove translation cube
+  xy.removeEventListener('mousedown', xyDownT, false);
+  xy.removeEventListener('mouseup', xyUpT, false);
+  //Remove Rotation cube
+  xy.removeEventListener('mousedown', xyDownR, false);
+  xy.removeEventListener('mouseup', xyUpR, false);
 
   if (BUTTON_CUBE) {
     xy.addEventListener('click', create_cube_xy, false);
@@ -188,9 +222,15 @@ function menu_state () {
   }
 
   if (BUTTON_MOVE) {
-    xy.addEventListener('mousedown', xyDown, false);
-    xy.addEventListener('mouseup', xyUp, false);
+    xy.addEventListener('mousedown', xyDownT, false);
+    xy.addEventListener('mouseup', xyUpT, false);
   }
+
+  if (BUTTON_ROTATION) {
+    xy.addEventListener('mousedown', xyDownR, false);
+    xy.addEventListener('mouseup', xyUpR, false);
+  }
+
 }
 
 function buttonPressed(event){

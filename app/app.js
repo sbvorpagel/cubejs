@@ -54,6 +54,7 @@ function button_cube() {
 
 function button_select() {
   set_all_false();
+  SELECTED = [];
   BUTTON_SELECT = true;
   menu_state();
 }
@@ -73,11 +74,9 @@ function button_move() {
 }
 
 function button_rotation() {
-  if (BUTTON_ROTATION == false)
-    BUTTON_ROTATION = true;
-  else
-    BUTTON_ROTATION = false;
-    console.log("ROTATION", BUTTON_ROTATION);
+  set_all_false();
+  BUTTON_ROTATION= true;
+  menu_state();
 }
 
 function button_scale() {
