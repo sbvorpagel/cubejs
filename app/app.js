@@ -23,6 +23,8 @@ var JUMP     = 30;
 
 function set_all_false() {
   BUTTON_CUBE = false;
+  BUTTON_SELECT = false;
+  BUTTON_CUBES = false;
   BUTTON_MOVE = false;
   BUTTON_ROTATION = false;
   BUTTON_SCALE = false;
@@ -49,27 +51,17 @@ function button_cube() {
 
 function button_select() {
   set_all_false();
-  if (BUTTON_SELECT == true) BUTTON_SELECT= false;
-  else BUTTON_SELECT = true;
   SELECTED = [];
+  BUTTON_SELECT = true;
   menu_state();
-  drawObjects();
 }
 
 function button_cubes() {
-  if (BUTTON_CUBES == true) BUTTON_CUBES = false;
-  else BUTTON_CUBES = true;
-  if (SELECTED.length > 1) {
-    var cont = 0;
-    for (var i = 1; i < SELECTED.length; i++) {
-      cont++;
-      var a = CUBES.getObjects()[i].getObjects();
-      CUBES.getObjects()[SELECTED[0]].getObjects().push(a[0]);
-    }
-    CUBES.getObjects().splice(1, cont);
-  }
-  SELECTED = [];
-  drawObjects();
+  if (BUTTON_CUBES == false)
+    BUTTON_CUBES = true;
+  else
+    BUTTON_CUBES = false;
+    console.log("CUBES", BUTTON_CUBES);
 }
 
 function button_move() {
@@ -93,12 +85,12 @@ function button_scale() {
 function button_visible() {
   if (BUTTON_VISIBLE == true) BUTTON_VISIBLE = false;
   else BUTTON_VISIBLE = true;
-  drawObjects();
+  drawObjects(CUBES,canvas);
 }
 
 function button_delete() {
   CUBES = new Objects();
-  drawObjects();
+  drawObjects(CUBES,canvas);
 }
 
 
