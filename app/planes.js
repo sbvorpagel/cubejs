@@ -7,7 +7,6 @@ var indexes = [];
 
 function startViews(){
   xy = document.getElementById("view_xy");
-  console.log("XY=", xy)
   xz = document.getElementById("view_xz");
   zy = document.getElementById("view_zy");
   view = document.getElementById("view");
@@ -157,7 +156,6 @@ function xyDownT(e){
 function xyUpT(){
  dragok = false;
  xy.removeEventListener('mousemove', xyMoveT, false);
- console.log("sortei");
 }
 
 function xyMoveR(e){
@@ -168,10 +166,10 @@ function xyMoveR(e){
     y = e.y - rect.top;
     z = CENTER_Z;
   }
-  if(iX < x) rotation_y(5, SELECTED[0].getObjects());
-  if(iX > x) rotation_y(-5, SELECTED[0].getObjects());
-  if(iY > y) rotation_x(5, SELECTED[0].getObjects());
-  if(iY < y) rotation_x(-5, SELECTED[0].getObjects());
+  if(iX < x) rotation_y(0.5, SELECTED[0].getObjects());
+  if(iX > x) rotation_y(-0.5, SELECTED[0].getObjects());
+  if(iY > y) rotation_x(0.5, SELECTED[0].getObjects());
+  if(iY < y) rotation_x(-0.5, SELECTED[0].getObjects());
   iX = x;
   iY = y;
   drawObjects(CUBES,canvas,indexes)
@@ -189,7 +187,6 @@ function xyDownR(e){
 function xyUpR(){
  dragok = false;
  xy.removeEventListener('mousemove', xyMoveR, false);
- console.log("sortei");
 }
 
 
@@ -241,8 +238,4 @@ function buttonPressed(event){
 }
 
 function moved(event){
-  if(!buttonPressed(event))
-    console.log("Parou!");
-  else
-  console.log("Desclique:",event.clientX, event.clientY);
 }

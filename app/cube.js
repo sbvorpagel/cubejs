@@ -77,7 +77,7 @@ function Cube() {
     or not.
     Parameter: Face index.
   */
-  this.normal = function(i){
+   this.normal = function(i){
     a = this.vertices[this.faces[i][0]];
     b = this.vertices[this.faces[i][1]];
     c = this.vertices[this.faces[i][2]];

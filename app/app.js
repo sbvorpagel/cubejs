@@ -29,7 +29,6 @@ function set_all_false() {
   BUTTON_MOVE = false;
   BUTTON_ROTATION = false;
   BUTTON_SCALE = false;
-  BUTTON_VISIBLE = false;
   BUTTON_DELETE = false;
 }
 
@@ -88,11 +87,9 @@ function button_scale() {
 }
 
 function button_visible() {
-  if (BUTTON_VISIBLE == false)
-    BUTTON_VISIBLE = true;
-  else
-    BUTTON_VISIBLE = false;
-    console.log("VISIBLE", BUTTON_VISIBLE);
+  if (BUTTON_VISIBLE == true) BUTTON_VISIBLE = false;
+  else BUTTON_VISIBLE = true;
+  drawObjects(CUBES,canvas);
 }
 
 function button_delete() {

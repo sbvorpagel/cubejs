@@ -27,7 +27,6 @@ function multiply(a, b) {
 
 function centerCubes (cubes) {
   var minX=9999, minY=9999, minZ=9999, maxX=-1, maxY=-1, maxZ=-1;
-  console.log(cubes);
   if (cubes.length > 1) {
     for (var i = 0; i < cubes.length; i++) {
       if (cubes[i].center[0] < minX) minX = cubes[i].center[0];

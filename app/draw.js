@@ -27,6 +27,11 @@ function drawObjects(cubes, canvas, selected) {
       return false;
   }
 
+  function visible(a, b){
+    if ((a[0]*b[0] + a[1]*b[1] + a[2]*b[2]) >= 0) return true;
+    return false;
+  }
+
   // Draws the objects on the xy canvas
   drawXY = function() {
     var list   = getList();
@@ -38,21 +43,23 @@ function drawObjects(cubes, canvas, selected) {
         var cube = cubes[x];
         for (var i = 0; i < 6; i++) {
           var f = cube.faces[i];
-          ctxy.strokeStyle="#000000";
+          if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
+            ctxy.strokeStyle="#000000";
 
-          if(select){
-            if((select[0] == j) && (select[1] == x)){
-              ctxy.strokeStyle="#2E9AFE";
+            if(select){
+              if((select[0] == j) && (select[1] == x)){
+                ctxy.strokeStyle="#2E9AFE";
+              }
             }
-          }
 
-          ctxy.beginPath();
-          ctxy.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].y);
-          ctxy.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].y);
-          ctxy.lineTo(cube.vertices[[f[2]]].x, cube.vertices[[f[2]]].y);
-          ctxy.lineTo(cube.vertices[[f[3]]].x, cube.vertices[[f[3]]].y);
-          ctxy.closePath();
-          ctxy.stroke();
+            ctxy.beginPath();
+            ctxy.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].y);
+            ctxy.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].y);
+            ctxy.lineTo(cube.vertices[[f[2]]].x, cube.vertices[[f[2]]].y);
+            ctxy.lineTo(cube.vertices[[f[3]]].x, cube.vertices[[f[3]]].y);
+            ctxy.closePath();
+            ctxy.stroke();
+          }
         }
       }
     }
@@ -69,21 +76,23 @@ function drawObjects(cubes, canvas, selected) {
         var cube = cubes[x];
         for (var i = 0; i < 6; i++) {
           var f = cube.faces[i];
-          ctxz.strokeStyle="#000000";
+          if (visible(cube.normal(i), [0,1,0]) || !BUTTON_VISIBLE) {
+            ctxz.strokeStyle="#000000";
 
-          if(select){
-            if((select[0] == j) && (select[1] == x)){
-              ctxy.strokeStyle="#2E9AFE";
+            if(select){
+              if((select[0] == j) && (select[1] == x)){
+                ctxy.strokeStyle="#2E9AFE";
+              }
             }
-          }
 
-          ctxz.beginPath();
-          ctxz.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].z);
-          ctxz.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].z);
-          ctxz.lineTo(cube.vertices[[f[2]]].x, cube.vertices[[f[2]]].z);
-          ctxz.lineTo(cube.vertices[[f[3]]].x, cube.vertices[[f[3]]].z);
-          ctxz.closePath();
-          ctxz.stroke();
+            ctxz.beginPath();
+            ctxz.moveTo(cube.vertices[[f[0]]].x, cube.vertices[[f[0]]].z);
+            ctxz.lineTo(cube.vertices[[f[1]]].x, cube.vertices[[f[1]]].z);
+            ctxz.lineTo(cube.vertices[[f[2]]].x, cube.vertices[[f[2]]].z);
+            ctxz.lineTo(cube.vertices[[f[3]]].x, cube.vertices[[f[3]]].z);
+            ctxz.closePath();
+            ctxz.stroke();
+          }
         }
       }
     }
@@ -99,21 +108,22 @@ function drawObjects(cubes, canvas, selected) {
         var cube = cubes[x];
         for (var i = 0; i < 6; i++) {
           var f = cube.faces[i];
-          ctxz.strokeStyle="#000000";
-
-          if(select){
-            if((select[0] == j) && (select[1] == x)){
-              ctzy.strokeStyle="#2E9AFE";
+          if (visible(cube.normal(i), [1,0,0]) || !BUTTON_VISIBLE) {
+            ctxz.strokeStyle="#000000";
+            if(select){
+              if((select[0] == j) && (select[1] == x)){
+                ctzy.strokeStyle="#2E9AFE";
+              }
             }
-          }
 
-          ctzy.beginPath();
-          ctzy.moveTo(cube.vertices[[f[0]]].z , cube.vertices[[f[0]]].y);
-          ctzy.lineTo(cube.vertices[[f[1]]].z, cube.vertices[[f[1]]].y);
-          ctzy.lineTo(cube.vertices[[f[2]]].z, cube.vertices[[f[2]]].y);
-          ctzy.lineTo(cube.vertices[[f[3]]].z, cube.vertices[[f[3]]].y);
-          ctzy.closePath();
-          ctzy.stroke();
+            ctzy.beginPath();
+            ctzy.moveTo(cube.vertices[[f[0]]].z , cube.vertices[[f[0]]].y);
+            ctzy.lineTo(cube.vertices[[f[1]]].z, cube.vertices[[f[1]]].y);
+            ctzy.lineTo(cube.vertices[[f[2]]].z, cube.vertices[[f[2]]].y);
+            ctzy.lineTo(cube.vertices[[f[3]]].z, cube.vertices[[f[3]]].y);
+            ctzy.closePath();
+            ctzy.stroke();
+          }
         }
       }
     }
