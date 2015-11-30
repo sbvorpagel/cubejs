@@ -3,7 +3,7 @@
   view planes.
 */
 
-var indexes = [];
+var index = [];
 
 function startViews(){
   xy = document.getElementById("view_xy");
@@ -41,39 +41,27 @@ function startViews(){
  Calculate the distance between a pointe clicked by the user and the center of each
  each cube to find the closest one. THe closest one is the one selected by the user.
 */
-getDistance = function (cubes, click){
+getDistance = function (cubes, click, a, b){
   var objects     = cubes; // List of cubes
   var point       = click; // Point clicked on screen
   var select      = false; // Distance calulated between point and center of a cube
-  var smallest    = 999;   // Smallest distance found
   var listIndex   = 0;     // Index of the list where the cube is stored
-  var objectIndex = 0;     // Index of the object
   var center;
 
   for(var i = 0; i < objects.length; i++){
     list = objects[i].getObjects();
-
     for(var j = 0; j < list.length; j++){
       center = list[j].getCenter();
-
-      if((click[0] <= (center[0] + JUMP)) && (click[0] >= (center[0] - JUMP))){
-        console.log("Passou X!");
-        if((click[1] <= (center[1] + JUMP)) && (click[1] >= (center[1] - JUMP))){
+      if((click[0] <= (center[a] + JUMP)) && (click[0] >= (center[a] - JUMP))){
+        if((click[1] <= (center[b] + JUMP)) && (click[1] >= (center[b] - JUMP))){
+          console.log("Passou");
           listIndex = i;
-          objectIndex = j;
-          select = true;
         }
       }
     }
   }
-  if(select) {
-    SELECTED.push(objects[objectIndex]);
-    return [listIndex, objectIndex];
-  } else {
-    false;
-  }
+  return listIndex;
 }
-
 function create_cube_xy(event) {
   var cube = new Cube();
   var rect = xy.getBoundingClientRect();
@@ -107,24 +95,23 @@ function create_cube_zy(event) {
 function select_cube_xy(event) {
   var rect = xy.getBoundingClientRect();
   var click = [event.x - rect.left, event.y - rect.top];
-  var indexes = [];
-  indexes = getDistance(CUBES.getObjects(), click);
-  drawObjects(CUBES,canvas,indexes)
+  SELECTED.push(getDistance(CUBES.getObjects(), click, 0, 1));
+  drawObjects();
 }
 
 function select_cube_xz(event) {
   var rect = xz.getBoundingClientRect();
   var click = [event.x - rect.left, event.y - rect.top];
-  indexes = getDistance(CUBES.getObjects(), click);
-  drawObjects(CUBES,canvas,indexes)
+  SELECTED.push(getDistance(CUBES.getObjects(), click, 0, 2));
+  drawObjects();
 }
 
 function select_cube_zy(event) {
   var rect = zy.getBoundingClientRect();
   var click = [event.x - rect.left, event.y - rect.top];
-  var indexes = [];
-  indexes = getDistance(CUBES.getObjects(), click);
-  drawObjects(CUBES,canvas,indexes)
+  SELECTED.push(getDistance(CUBES.getObjects(), click, 1, 2));
+  console.log(SELECTED);
+  drawObjects();
 }
 
 var iX, iY, iZ;
@@ -135,13 +122,14 @@ function xyMoveT(e){
   if (dragok) {
     x = e.x - rect.left;
     y = e.y - rect.top;
-    z = CENTER_Z;
   }
-  translation(x-iX, y-iY, iZ, SELECTED[0].getObjects());
+  for (var i = 0; i < SELECTED.length; i++) {
+    translation(x-iX, y-iY, 0, CUBES.getObjects()[SELECTED[i]].getObjects());
+  }
   iX = x;
   iY = y;
   iZ = 0;
-  drawObjects(CUBES,canvas,indexes)
+  drawObjects();
 }
 
 function xyDownT(e){
@@ -158,6 +146,66 @@ function xyUpT(){
  xy.removeEventListener('mousemove', xyMoveT, false);
 }
 
+function xzMoveT(e){
+  var rect = xz.getBoundingClientRect();
+  var x, y, z;
+  if (dragok) {
+    x = e.x - rect.left;
+    y = e.y - rect.top;
+  }
+  for (var i = 0; i < SELECTED.length; i++) {
+    translation(x-iX, 0, y-iY, CUBES.getObjects()[SELECTED[i]].getObjects());
+  }
+  iX = x;
+  iY = y;
+  iZ = 0;
+  drawObjects();
+}
+
+function xzDownT(e){
+  var rect = xz.getBoundingClientRect();
+  iX = e.x - rect.left;
+  iY = e.y - rect.top;
+  iZ = CENTER_Z;
+  dragok = true;
+  xz.addEventListener('mousemove', xzMoveT, false);
+}
+
+function xzUpT(){
+ dragok = false;
+ xz.removeEventListener('mousemove', xzMoveT, false);
+}
+
+function zyMoveT(e){
+  var rect = zy.getBoundingClientRect();
+  var x, y, z;
+  if (dragok) {
+    x = e.x - rect.left;
+    y = e.y - rect.top;
+  }
+  for (var i = 0; i < SELECTED.length; i++) {
+    translation(0, x-iX, y-iY, CUBES.getObjects()[SELECTED[i]].getObjects());
+  }
+  iX = x;
+  iY = y;
+  iZ = 0;
+  drawObjects();
+}
+
+function zyDownT(e){
+  var rect = zy.getBoundingClientRect();
+  iX = e.x - rect.left;
+  iY = e.y - rect.top;
+  iZ = CENTER_Z;
+  dragok = true;
+  zy.addEventListener('mousemove', zyMoveT, false);
+}
+
+function zyUpT(){
+ dragok = false;
+ zy.removeEventListener('mousemove', zyMoveT, false);
+}
+
 function xyMoveR(e){
   var rect = xy.getBoundingClientRect();
   var x, y, z;
@@ -166,13 +214,15 @@ function xyMoveR(e){
     y = e.y - rect.top;
     z = CENTER_Z;
   }
-  if(iX < x) rotation_y(0.5, SELECTED[0].getObjects());
-  if(iX > x) rotation_y(-0.5, SELECTED[0].getObjects());
-  if(iY > y) rotation_x(0.5, SELECTED[0].getObjects());
-  if(iY < y) rotation_x(-0.5, SELECTED[0].getObjects());
+  for (var i = 0; i < SELECTED.length; i++) {
+    if(iX < x) rotation_y(1, CUBES.getObjects()[SELECTED[i]].getObjects());
+    if(iX > x) rotation_y(-1, CUBES.getObjects()[SELECTED[i]].getObjects());
+    if(iY > y) rotation_x(1, CUBES.getObjects()[SELECTED[i]].getObjects());
+    if(iY < y) rotation_x(-1, CUBES.getObjects()[SELECTED[i]].getObjects());
+  }
   iX = x;
   iY = y;
-  drawObjects(CUBES,canvas,indexes)
+  drawObjects();
 }
 
 function xyDownR(e){
@@ -189,32 +239,114 @@ function xyUpR(){
  xy.removeEventListener('mousemove', xyMoveR, false);
 }
 
-function xyMoveS(e){
-  var rect = xy.getBoundingClientRect();
+function xzMoveR(e){
+  var rect = xz.getBoundingClientRect();
   var x, y, z;
   if (dragok) {
     x = e.x - rect.left;
     y = e.y - rect.top;
     z = CENTER_Z;
   }
-  console.log(y-iY);
-  if(iY != y) scale_z(-(y-iY), SELECTED[0].getObjects());
+  for (var i = 0; i < SELECTED.length; i++) {
+    if(iX < x) rotation_y(1, CUBES.getObjects()[SELECTED[i]].getObjects());
+    if(iX > x) rotation_y(-1, CUBES.getObjects()[SELECTED[i]].getObjects());
+    if(iY > y) rotation_x(1, CUBES.getObjects()[SELECTED[i]].getObjects());
+    if(iY < y) rotation_x(-1, CUBES.getObjects()[SELECTED[i]].getObjects());
+  }
+  iX = x;
   iY = y;
-  drawObjects(CUBES,canvas,indexes)
+  drawObjects();
 }
 
-function xyDownS(e){
-  var rect = xy.getBoundingClientRect();
+function xzDownR(e){
+  var rect = xz.getBoundingClientRect();
   iX = e.x - rect.left;
   iY = e.y - rect.top;
   iZ = CENTER_Z;
   dragok = true;
-  xy.addEventListener('mousemove', xyMoveS, false);
+  xz.addEventListener('mousemove', xzMoveR, false);
 }
 
-function xyUpS(){
+function xzUpR(){
  dragok = false;
- xy.removeEventListener('mousemove', xyMoveS, false);
+ xz.removeEventListener('mousemove', xzMoveR, false);
+}
+
+function zyMoveR(e){
+  var rect = zy.getBoundingClientRect();
+  var x, y, z;
+  if (dragok) {
+    x = e.x - rect.left;
+    y = e.y - rect.top;
+    z = CENTER_Z;
+  }
+  for (var i = 0; i < SELECTED.length; i++) {
+    if(iX < x) rotation_y(1, CUBES.getObjects()[SELECTED[i]].getObjects());
+    if(iX > x) rotation_y(-1, CUBES.getObjects()[SELECTED[i]].getObjects());
+    if(iY > y) rotation_x(1, CUBES.getObjects()[SELECTED[i]].getObjects());
+    if(iY < y) rotation_x(-1, CUBES.getObjects()[SELECTED[i]].getObjects());
+  }
+  iX = x;
+  iY = y;
+  drawObjects();
+}
+
+function zyDownR(e){
+  var rect = zy.getBoundingClientRect();
+  iX = e.x - rect.left;
+  iY = e.y - rect.top;
+  iZ = CENTER_Z;
+  dragok = true;
+  zy.addEventListener('mousemove', zyMoveR, false);
+}
+
+function zyUpR(){
+ dragok = false;
+ zy.removeEventListener('mousemove', zyMoveR, false);
+}
+
+function xzMoveS(e){
+  var rect = xz.getBoundingClientRect();
+  var y;
+  if (dragok) y = e.y - rect.top;
+  if (SELECTED.length == 1)
+    if(iY != y) scale_z(-(y-iY), CUBES.getObjects()[SELECTED[0]].getObjects());
+  iY = y;
+  drawObjects();
+}
+
+function xzDownS(e){
+  var rect = xz.getBoundingClientRect();
+  iY = e.y - rect.top;
+  dragok = true;
+  xz.addEventListener('mousemove', xzMoveS, false);
+}
+
+function xzUpS(){
+ dragok = false;
+ xz.removeEventListener('mousemove', xzMoveS, false);
+}
+
+function zyMoveS(e){
+  var rect = zy.getBoundingClientRect();
+  var x;
+  if (dragok) x = e.x - rect.left;
+  if (SELECTED.length == 1)
+    if(iX != x) scale_z(-(x-iX), CUBES.getObjects()[SELECTED[0]].getObjects());
+  iX = x;
+  drawObjects();
+}
+
+function zyDownS(e){
+  var rect = zy.getBoundingClientRect();
+  iX = e.x - rect.left;
+  dragok = true;
+  zy.addEventListener('mousemove', zyMoveS, false);
+}
+
+function zyUpS(){
+ dragok = false;
+ zy.removeEventListener('mousemove', zyMoveS, false);
 }
 
 
@@ -228,14 +360,25 @@ function menu_state () {
   xz.removeEventListener('click', select_cube_xz, false);
   zy.removeEventListener('click', select_cube_zy, false);
   //Remove scale cube
-  xy.removeEventListener('mousedown', xyDownS, false);
-  xy.removeEventListener('mouseup', xyUpS, false);
+  xz.removeEventListener('mousedown', xzDownS, false);
+  xz.removeEventListener('mouseup', xzUpS, false);
+  zy.removeEventListener('mousedown', zyDownS, false);
+  zy.removeEventListener('mouseup', zyUpS, false);
   //Remove translation cube
   xy.removeEventListener('mousedown', xyDownT, false);
   xy.removeEventListener('mouseup', xyUpT, false);
+  xz.removeEventListener('mousedown', xzDownT, false);
+  xz.removeEventListener('mouseup', xzUpT, false);
+  zy.removeEventListener('mousedown', zyDownT, false);
+  zy.removeEventListener('mouseup', zyUpT, false);
   //Remove Rotation cube
   xy.removeEventListener('mousedown', xyDownR, false);
   xy.removeEventListener('mouseup', xyUpR, false);
+  xz.removeEventListener('mousedown', xzDownR, false);
+  xz.removeEventListener('mouseup', xzUpR, false);
+  zy.removeEventListener('mousedown', zyDownR, false);
+  zy.removeEventListener('mouseup', zyUpR, false);
+
 
   if (BUTTON_CUBE) {
     xy.addEventListener('click', create_cube_xy, false);
@@ -252,16 +395,26 @@ function menu_state () {
   if (BUTTON_MOVE) {
     xy.addEventListener('mousedown', xyDownT, false);
     xy.addEventListener('mouseup', xyUpT, false);
+    xz.addEventListener('mousedown', xzDownT, false);
+    xz.addEventListener('mouseup', xzUpT, false);
+    zy.addEventListener('mousedown', zyDownT, false);
+    zy.addEventListener('mouseup', zyUpT, false);
   }
 
   if (BUTTON_ROTATION) {
     xy.addEventListener('mousedown', xyDownR, false);
     xy.addEventListener('mouseup', xyUpR, false);
+    xz.addEventListener('mousedown', xzDownR, false);
+    xz.addEventListener('mouseup', xzUpR, false);
+    zy.addEventListener('mousedown', zyDownR, false);
+    zy.addEventListener('mouseup', zyUpR, false);
   }
 
   if (BUTTON_SCALE) {
-    xy.addEventListener('mousedown', xyDownS, false);
-    xy.addEventListener('mouseup', xyUpS, false);
+    xz.addEventListener('mousedown', xzDownS, false);
+    xz.addEventListener('mouseup', xzUpS, false);
+    zy.addEventListener('mousedown', zyDownS, false);
+    zy.addEventListener('mouseup', zyUpS, false);
   }
 
 }

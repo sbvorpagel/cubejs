@@ -6,26 +6,12 @@
               canvas - a list of all the created canvas
 */
 
-function drawObjects(cubes, canvas, selected) {
-
-  this.cubes  = cubes;
-  this.canvas = canvas;
-  this.indexes = selected;
+function drawObjects() {
 
   /*
     Used to access this.cubes ince we can't access this.cubes
     directly from the drawing functions.
   */
-  getList = function(){
-    return this.cubes.getObjects()
-  }
-
-  isSelected = function(){
-    if(Array.isArray(this.indexes))
-      return this.indexes;
-    else
-      return false;
-  }
 
   function visible(a, b){
     if ((a[0]*b[0] + a[1]*b[1] + a[2]*b[2]) >= 0) return true;
@@ -34,8 +20,7 @@ function drawObjects(cubes, canvas, selected) {
 
   // Draws the objects on the xy canvas
   drawXY = function() {
-    var list   = getList();
-    var select = isSelected();
+    var list   = CUBES.getObjects();
 
     for(var j = 0; j < list.length; j++){
       var cubes = list[j].getObjects();
@@ -46,8 +31,8 @@ function drawObjects(cubes, canvas, selected) {
           if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
             ctxy.strokeStyle="#000000";
 
-            if(select){
-              if((select[0] == j) && (select[1] == x)){
+            for (var nx = 0; nx < SELECTED.length; nx++) {
+              if (SELECTED[nx] == j) {
                 ctxy.strokeStyle="#2E9AFE";
               }
             }
@@ -67,8 +52,7 @@ function drawObjects(cubes, canvas, selected) {
 
   // Draws the objects on the xz canvas
   drawXZ = function () {
-    var list   = getList();
-    var select = isSelected();
+    var list   = CUBES.getObjects();
 
     for(var j = 0; j < list.length; j++){
       var cubes = list[j].getObjects();
@@ -79,9 +63,9 @@ function drawObjects(cubes, canvas, selected) {
           if (visible(cube.normal(i), [0,1,0]) || !BUTTON_VISIBLE) {
             ctxz.strokeStyle="#000000";
 
-            if(select){
-              if((select[0] == j) && (select[1] == x)){
-                ctxy.strokeStyle="#2E9AFE";
+            for (var nx = 0; nx < SELECTED.length; nx++) {
+              if (SELECTED[nx] == j) {
+                ctxz.strokeStyle="#2E9AFE";
               }
             }
 
@@ -99,8 +83,7 @@ function drawObjects(cubes, canvas, selected) {
   }
   // Draws the objects on the zy canvas
   drawZY = function () {
-    var list   = getList();
-    var select = isSelected();
+    var list   = CUBES.getObjects();
 
     for(var j = 0; j < list.length; j++){
       var cubes = list[j].getObjects();
@@ -110,8 +93,10 @@ function drawObjects(cubes, canvas, selected) {
           var f = cube.faces[i];
           if (visible(cube.normal(i), [1,0,0]) || !BUTTON_VISIBLE) {
             ctxz.strokeStyle="#000000";
-            if(select){
-              if((select[0] == j) && (select[1] == x)){
+
+            for (var nx = 0; nx < SELECTED.length; nx++) {
+              if (SELECTED[nx] == j) {
+                console.log(SELECTED);
                 ctzy.strokeStyle="#2E9AFE";
               }
             }

@@ -121,6 +121,7 @@ function rotation_x (angule, cubes) {
     [0, sin, cos, 0],
     [0, 0, 0, 1]
   ];
+  console.log(cubes);
   var center = centerCubes(cubes);
   cubes = translationNC(-center[0], -center[1], -center[2], cubes);
   for (var c = 0; c < cubes.length; c++) {
