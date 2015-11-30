@@ -117,10 +117,10 @@ function drawObjects(cubes, canvas, selected) {
             }
 
             ctzy.beginPath();
-            ctzy.moveTo(cube.vertices[[f[0]]].z , cube.vertices[[f[0]]].y);
-            ctzy.lineTo(cube.vertices[[f[1]]].z, cube.vertices[[f[1]]].y);
-            ctzy.lineTo(cube.vertices[[f[2]]].z, cube.vertices[[f[2]]].y);
-            ctzy.lineTo(cube.vertices[[f[3]]].z, cube.vertices[[f[3]]].y);
+            ctzy.moveTo(cube.vertices[[f[0]]].y, cube.vertices[[f[0]]].z);
+            ctzy.lineTo(cube.vertices[[f[1]]].y, cube.vertices[[f[1]]].z);
+            ctzy.lineTo(cube.vertices[[f[2]]].y, cube.vertices[[f[2]]].z);
+            ctzy.lineTo(cube.vertices[[f[3]]].y, cube.vertices[[f[3]]].z);
             ctzy.closePath();
             ctzy.stroke();
           }

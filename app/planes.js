@@ -98,7 +98,7 @@ function create_cube_zy(event) {
   var cube = new Cube();
   var rect = zy.getBoundingClientRect();
   var list = new Objects();
-  cube.createCube(CENTER_X, event.y - rect.top, event.x - rect.left);
+  cube.createCube(CENTER_X, event.x - rect.left, event.y - rect.top);
   list.addObjects(cube);
   CUBES.addObjects(list);
   drawObjects(CUBES,canvas);
@@ -189,6 +189,34 @@ function xyUpR(){
  xy.removeEventListener('mousemove', xyMoveR, false);
 }
 
+function xyMoveS(e){
+  var rect = xy.getBoundingClientRect();
+  var x, y, z;
+  if (dragok) {
+    x = e.x - rect.left;
+    y = e.y - rect.top;
+    z = CENTER_Z;
+  }
+  console.log(y-iY);
+  if(iY != y) scale_z(-(y-iY), SELECTED[0].getObjects());
+  iY = y;
+  drawObjects(CUBES,canvas,indexes)
+}
+
+function xyDownS(e){
+  var rect = xy.getBoundingClientRect();
+  iX = e.x - rect.left;
+  iY = e.y - rect.top;
+  iZ = CENTER_Z;
+  dragok = true;
+  xy.addEventListener('mousemove', xyMoveS, false);
+}
+
+function xyUpS(){
+ dragok = false;
+ xy.removeEventListener('mousemove', xyMoveS, false);
+}
+
 
 function menu_state () {
   //remove create cube
@@ -199,6 +227,9 @@ function menu_state () {
   xy.removeEventListener('click', select_cube_xy, false);
   xz.removeEventListener('click', select_cube_xz, false);
   zy.removeEventListener('click', select_cube_zy, false);
+  //Remove scale cube
+  xy.removeEventListener('mousedown', xyDownS, false);
+  xy.removeEventListener('mouseup', xyUpS, false);
   //Remove translation cube
   xy.removeEventListener('mousedown', xyDownT, false);
   xy.removeEventListener('mouseup', xyUpT, false);
@@ -226,6 +257,11 @@ function menu_state () {
   if (BUTTON_ROTATION) {
     xy.addEventListener('mousedown', xyDownR, false);
     xy.addEventListener('mouseup', xyUpR, false);
+  }
+
+  if (BUTTON_SCALE) {
+    xy.addEventListener('mousedown', xyDownS, false);
+    xy.addEventListener('mouseup', xyUpS, false);
   }
 
 }

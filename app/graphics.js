@@ -141,6 +141,6 @@ function scale_z (value, cubes) {
     }
     cubes[c].matrix2cube(cube);
   }
-  cubes = translation(CENTER_X, CENTER_Y, CENTER_Z, cubes);
+  cubes = translationNC(CENTER_X, CENTER_Y, CENTER_Z, cubes);
   return cubes;
 }

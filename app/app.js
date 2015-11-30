@@ -15,7 +15,6 @@ var BUTTON_MOVE = false;
 var BUTTON_ROTATION = false;
 var BUTTON_SCALE = false;
 var BUTTON_VISIBLE = false;
-var BUTTON_DELETE = false;
 
 var CENTER_X = 315;
 var CENTER_Y = 163;
@@ -29,7 +28,6 @@ function set_all_false() {
   BUTTON_MOVE = false;
   BUTTON_ROTATION = false;
   BUTTON_SCALE = false;
-  BUTTON_DELETE = false;
 }
 
 function button_save(name, type) {
@@ -74,16 +72,14 @@ function button_move() {
 
 function button_rotation() {
   set_all_false();
-  BUTTON_ROTATION= true;
+  BUTTON_ROTATION = true;
   menu_state();
 }
 
 function button_scale() {
-  if (BUTTON_SCALE == false)
-    BUTTON_SCALE = true;
-  else
-    BUTTON_SCALE = false;
-    console.log("SCALE", BUTTON_SCALE);
+  set_all_false();
+  BUTTON_SCALE = true;
+  menu_state();
 }
 
 function button_visible() {
@@ -93,11 +89,8 @@ function button_visible() {
 }
 
 function button_delete() {
-  if (BUTTON_DELETE == false)
-    BUTTON_DELETE = true;
-  else
-    BUTTON_DELETE = false;
-    console.log("DELETE", BUTTON_DELETE);
+  CUBES = new Objects();
+  drawObjects(CUBES,canvas);
 }
 
 
