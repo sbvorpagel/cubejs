@@ -134,7 +134,7 @@ function rotation_x (angule, cubes) {
 }
 
 function scale_z (value, cubes) {
-  cubes = translation(-CENTER_X, -CENTER_Y, -CENTER_Z, cubes);
+  cubes = translationNC(-CENTER_X, -CENTER_Y, -CENTER_Z, cubes);
   for (var c = 0; c < cubes.length; c++) {
     var cube = cubes[c].cube2matrix();
     for (var i = 0; i < cube.length; i++) {

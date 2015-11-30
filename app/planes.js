@@ -309,8 +309,11 @@ function xzMoveS(e){
   var rect = xz.getBoundingClientRect();
   var y;
   if (dragok) y = e.y - rect.top;
+  var a;
+  if (iY < y) a = 0.95;
+  else a = 1.05;
   if (SELECTED.length == 1)
-    if(iY != y) scale_z(-(y-iY), CUBES.getObjects()[SELECTED[0]].getObjects());
+    if(iY != y) scale_z(a , CUBES.getObjects()[SELECTED[0]].getObjects());
   iY = y;
   drawObjects();
 }
@@ -331,8 +334,11 @@ function zyMoveS(e){
   var rect = zy.getBoundingClientRect();
   var x;
   if (dragok) x = e.x - rect.left;
+  var a;
+  if (iX < x) a = 0.95;
+  else a = 1.05;
   if (SELECTED.length == 1)
-    if(iX != x) scale_z(-(x-iX), CUBES.getObjects()[SELECTED[0]].getObjects());
+    if(iX != x) scale_z(a , CUBES.getObjects()[SELECTED[0]].getObjects());
   iX = x;
   drawObjects();
 }
