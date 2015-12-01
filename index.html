@@ -74,7 +74,7 @@
       </div>
     </nav>
 
-    <input id="openFileID" type='file' onchange='openFile(event)' style="display: none;">
+    <input id="openFileID" type='file' onchange='openFile(event); this.value=null; return false;' style="display: none;">
 
       <div>
         <center>
