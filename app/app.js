@@ -37,9 +37,12 @@ function button_save(name, type) {
   a.click();
  }
 
-function button_open() {
-
-}
+ function button_open(json) {
+   set_all_false();
+   CUBES = new Objects();
+   CUBES.fromJSON(json);
+   drawObjects();
+ }
 
 function button_cube() {
   set_all_false();

@@ -20,6 +20,19 @@
 
     <script src="js/bootstrap.min.js"></script>
 
+    <script>
+      var openFile = function(event) {
+        var input = event.target;
+
+        var reader = new FileReader();
+        reader.onload = function(){
+          var text = reader.result;
+          button_open(text);
+        };
+        reader.readAsText(input.files[0]);
+      };
+    </script>
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 
@@ -60,6 +73,8 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+
+    <input type='file' accept='text/plain' onchange='openFile(event)'>
 
       <div>
         <center>
