@@ -33,9 +33,21 @@ function Objects() {
       var objs = new Objects();
       for (var j = 0; j < obj[i].objects.length; j++) {
         var cube = new Cube();
-        cube.createCubeJSON(obj[i].objects[j].center,
-                            obj[i].objects[j].vertices,
-                            obj[i].objects[j].faces);
+        var center = obj[i].objects[j].center;
+        var vertices = [];
+        var faces = [];
+        for (var k = 0; k < obj[i].objects[j].vertices.length; k++) {
+          var vertex = new Vertex(
+            obj[i].objects[j].vertices[k].x,
+            obj[i].objects[j].vertices[k].y,
+            obj[i].objects[j].vertices[k].z
+          );
+          vertices.push(vertex);
+        }
+        for (var k = 0; k < obj[i].objects[j].faces.length; k++) {
+          faces.push(obj[i].objects[j].faces[k]);
+        }
+        cube.createCubeJSON(center, vertices, faces);
         objs.addObjects(cube);
       }
       this.objects.push(objs);
