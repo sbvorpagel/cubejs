@@ -33,6 +33,7 @@ function set_all_false() {
 function button_save(name, type) {
   console.log(CUBES);
   var a = document.createElement("a");
+  console.log(CUBES.to_file());
   var file = new Blob([CUBES.to_file()], {type: type});
   a.href = URL.createObjectURL(file);
   a.download = name;
