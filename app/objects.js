@@ -27,6 +27,19 @@ function Objects() {
   }
 
   this.fromJSON = function(json) {
-    this.objects = JSON.parse(json);
+    this.objects = [];
+    var obj = JSON.parse(json);
+    for (var i = 0; i < obj.length; i++) {
+      var objs = new Objects();
+      for (var j = 0; j < obj[i].objects.length; j++) {
+        var cube = new Cube();
+        cube.createCubeJSON(obj[i].objects[j].center,
+                            obj[i].objects[j].vertices,
+                            obj[i].objects[j].faces);
+        objs.addObjects(cube);
+      }
+      this.objects.push(objs);
+    }
+    return this.objects;
   }
 }

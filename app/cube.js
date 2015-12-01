@@ -46,6 +46,12 @@ function Cube() {
     this.faces = [[0,1,2,3],[1,5,6,2],[5,4,7,6],[4,0,3,7],[0,4,5,1],[3,2,6,7]];
   }
 
+  this.createCubeJSON = function (center, vertices, faces) {
+    this.center = center;
+    this.vertices = vertices;
+    this.faces = faces;
+  }
+
   // Updates the color attribute
   this.updateColor = function(c) {
     this.c = c
