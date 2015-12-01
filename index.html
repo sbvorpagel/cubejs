@@ -54,7 +54,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a id="button_save_id" onclick="button_save(prompt('Please enter the file name to be saved.', 'file.cj'), 'text/plain')" title="Save"><i class="fa fa-save fa-2x"></i></a></li>
-            <li><a type="file" onchange="button_open()" title="Open"><i id="button_button_id" class="fa fa-folder-open fa-2x"></i></a></li>
+            <li><a type="file" onclick="document.getElementById('openFileID').click(); return false;" title="Open"><i id="button_button_id" class="fa fa-folder-open fa-2x"></i></a></li>
             <li><a onclick="button_cube()" title="Create Cube"><i id="button_cube_id" class="fa fa-cube fa-2x"></i></a></li>
             <li><a onclick="button_select()" title="Select Cube"><i class="fa fa-hand-pointer-o fa-2x"></i></a></li>
             <li><a onclick="button_cubes()" title="Group or Ungroup cubes"><i class="fa fa-cubes fa-2x"></i></a></li>
@@ -74,31 +74,42 @@
       </div>
     </nav>
 
-    <input type='file' accept='text/plain' onchange='openFile(event)'>
+    <input id="openFileID" type='file' onchange='openFile(event)' style="display: none;">
 
       <div>
         <center>
           <row class="col-md-12">
             <div class="col-md-6">
+              <div id="title">
+                X-Y
+              </div>
               <canvas class="canvas" id="view_xy" width="631" height="327">
                 Your browser does not support the HTML5 canvas element.
               </canvas>
             </div>
 
             <div class="col-md-6">
+              <div id="title">
+                X-Z
+              </div>
               <canvas class="canvas" id="view_xz" width="631" height="327">
                 Your browser does not support the HTML5 canvas element.
               </canvas>
             </div>
-
             <div class="col-md-6">
+              <div id="title">
+                Z-Y
+              </div>
               <canvas class="canvas" id="view_zy" width="631" height="327">
                 Your browser does not support the HTML5 canvas element.
               </canvas>
             </div>
 
             <div class="col-md-6">
-             <canvas class="canvas" id="view" width="631" height="327">
+              <div id="title">
+                View
+              </div>
+              <canvas class="canvas" id="view" width="631" height="327">
                 Your browser does not support the HTML5 canvas element.
               </canvas>
             </div>

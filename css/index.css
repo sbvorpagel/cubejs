@@ -3,6 +3,13 @@ body {
   background-color: #585858;
 }
 
+#title {
+  font-family: SaucerBB;
+  padding-top: 10px;
+  padding-left: 15px;
+  position: absolute;
+}
+
 .canvas {
   margin: 5px;
   background-color: #FAFAFA;
