@@ -45,7 +45,7 @@ getDistance = function (cubes, click, a, b){
   var objects     = cubes; // List of cubes
   var point       = click; // Point clicked on screen
   var select      = false; // Distance calulated between point and center of a cube
-  var listIndex   = 0;     // Index of the list where the cube is stored
+  var listIndex   = -1;     // Index of the list where the cube is stored
   var center;
 
   for(var i = 0; i < objects.length; i++){
@@ -54,7 +54,6 @@ getDistance = function (cubes, click, a, b){
       center = list[j].getCenter();
       if((click[0] <= (center[a] + JUMP)) && (click[0] >= (center[a] - JUMP))){
         if((click[1] <= (center[b] + JUMP)) && (click[1] >= (center[b] - JUMP))){
-          console.log("Passou");
           listIndex = i;
         }
       }
@@ -69,7 +68,7 @@ function create_cube_xy(event) {
   cube.createCube(event.x - rect.left, event.y - rect.top, CENTER_Z);
   list.addObjects(cube)
   CUBES.addObjects(list);
-  drawObjects(CUBES,canvas);
+  drawObjects();
 }
 
 function create_cube_xz(event) {
@@ -79,38 +78,49 @@ function create_cube_xz(event) {
   cube.createCube(event.x - rect.left, CENTER_Y ,event.y - rect.top);
   list.addObjects(cube)
   CUBES.addObjects(list);
-  drawObjects(CUBES,canvas);
+  drawObjects();
 }
 
 function create_cube_zy(event) {
   var cube = new Cube();
   var rect = zy.getBoundingClientRect();
   var list = new Objects();
-  cube.createCube(CENTER_X, event.x - rect.left, event.y - rect.top);
+  cube.createCube(CENTER_X, event.y - rect.top, event.x - rect.left);
   list.addObjects(cube);
   CUBES.addObjects(list);
-  drawObjects(CUBES,canvas);
+  drawObjects();
 }
 
 function select_cube_xy(event) {
   var rect = xy.getBoundingClientRect();
   var click = [event.x - rect.left, event.y - rect.top];
-  SELECTED.push(getDistance(CUBES.getObjects(), click, 0, 1));
+  var index = getDistance(CUBES.getObjects(), click, 0, 1)
+
+  // If some cube was selected
+  if(index != -1 )
+    SELECTED.push(index);
   drawObjects();
 }
 
 function select_cube_xz(event) {
   var rect = xz.getBoundingClientRect();
   var click = [event.x - rect.left, event.y - rect.top];
-  SELECTED.push(getDistance(CUBES.getObjects(), click, 0, 2));
+  var index = getDistance(CUBES.getObjects(), click, 0, 2)
+
+  // If some cube was selected
+  if(index != -1 )
+    SELECTED.push(index)
   drawObjects();
 }
 
 function select_cube_zy(event) {
   var rect = zy.getBoundingClientRect();
   var click = [event.x - rect.left, event.y - rect.top];
-  SELECTED.push(getDistance(CUBES.getObjects(), click, 1, 2));
-  console.log(SELECTED);
+  var index = getDistance(CUBES.getObjects(), click, 2, 1)
+
+  // If some cube was selected
+  if(index != -1 )
+    SELECTED.push(index)
   drawObjects();
 }
 

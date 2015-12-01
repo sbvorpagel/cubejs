@@ -23,15 +23,10 @@ function Objects() {
   }
 
   this.to_file = function() {
-    console.log("salgado");
-    console.log(this.objects);
-    console.log("doce");
     return JSON.stringify(this.objects);
   }
 
   this.fromJSON = function(json) {
-    console.log(json);
     this.objects = JSON.parse(json);
-    console.log(this.objects);
   }
 }

@@ -84,7 +84,6 @@ function drawObjects() {
   // Draws the objects on the zy canvas
   drawZY = function () {
     var list   = CUBES.getObjects();
-
     for(var j = 0; j < list.length; j++){
       var cubes = list[j].getObjects();
       for (var x = 0; x < cubes.length; x++) {
@@ -94,12 +93,11 @@ function drawObjects() {
           if (visible(cube.normal(i), [1,0,0]) || !BUTTON_VISIBLE) {
             ctxz.strokeStyle="#000000";
 
-            for (var nx = 0; nx < SELECTED.length; nx++) {
-              if (SELECTED[nx] == j) {
-                console.log(SELECTED);
-                ctzy.strokeStyle="#2E9AFE";
+              for (var nx = 0; nx < SELECTED.length; nx++) {
+                if (SELECTED[nx] == j) {
+                  ctzy.strokeStyle="#2E9AFE";
+                }
               }
-            }
 
             ctzy.beginPath();
             ctzy.moveTo(cube.vertices[[f[0]]].z, cube.vertices[[f[0]]].y);
@@ -119,6 +117,7 @@ function drawObjects() {
   ctxz.clearRect(0,0,this.canvas[1].width,this.canvas[1].height) // Canvas xz
   ctzy.clearRect(0,0,this.canvas[2].width,this.canvas[2].height) // Canvas zy
   drawXY();
-  drawXZ();
   drawZY();
+  drawXZ();
+
 }
