@@ -345,8 +345,8 @@ function zyMoveS(e){
   var x;
   if (dragok) x = e.x - rect.left;
   var a;
-  if (iX < x) a = 0.95;
-  else a = 1.05;
+  if (iX < x) a = 1.05;
+  else a = 0.95;
   if (SELECTED.length == 1)
     if(iX != x) scale_z(a , CUBES.getObjects()[SELECTED[0]].getObjects());
   iX = x;
