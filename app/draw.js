@@ -21,6 +21,18 @@ function drawObjects() {
   // Draws the objects on the xy canvas
   drawXY = function() {
     var list = CUBES.getObjects();
+    
+    var i_stack = new Array();  // indexes stack
+    var obj_stack = new Array();// objects stack
+    var current = list;
+
+    try{
+      current = 22; 
+    }
+    catch(err){
+        
+    }
+    
     for(var j = 0; j < list.length; j++){
       var cubes = list[j].getObjects();
       for (var x = 0; x < cubes.length; x++) {
