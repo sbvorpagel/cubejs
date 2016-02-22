@@ -1,3 +1,10 @@
+mf = new MATH(); // mathematical functions
+
+VRP = [400, 300, 1000, 1];
+P = [30, 20, 50, 1];
+view_up = [0, 1, 0]
+
+
 //Global canvas var
 var xy;
 var zx;
@@ -15,6 +22,8 @@ var BUTTON_MOVE = false;
 var BUTTON_ROTATION = false;
 var BUTTON_SCALE = false;
 var BUTTON_VISIBLE = false;
+var BUTTON_VISUALIZATION = false;
+
 
 var CENTER_X = 315;
 var CENTER_Y = 163;
@@ -59,9 +68,9 @@ function button_select() {
 }
 
 function button_cubes() {
-  if (BUTTON_CUBES == true) 
+  if (BUTTON_CUBES == true)
       BUTTON_CUBES = false;
-  else 
+  else
       BUTTON_CUBES = true;
   if (SELECTED.length > 1) {
     /* Creates a new list where the selected cubes will be grouped */
@@ -69,16 +78,16 @@ function button_cubes() {
     for (var i = 0; i < SELECTED.length; i++) {
       /* Gets the first list of cube(s) from the CUBES array with SELECTED[i] index */
       var a = CUBES.getObjects()[SELECTED[i]];
-     
-     /* Add the first item on the CUBES list to the group */ 
+
+     /* Add the first item on the CUBES list to the group */
       group.addObjects(a);
     }
-    
+
     /* Remove the objects grouped from the CUBES list */
     for(var i = 0; i < SELECTED.length; i++){
-      CUBES.getObjects().splice(SELECTED[i],1);   
+      CUBES.getObjects().splice(SELECTED[i],1);
     }
-    
+
     /* Adds the group as one object to the CUBES list */
     CUBES.addObjects(group);
   }
@@ -112,6 +121,12 @@ function button_visible() {
 
 function button_delete() {
   CUBES = new Objects();
+  drawObjects();
+}
+
+function button_visualization() {
+  if (BUTTON_VISUALIZATION == true) BUTTON_VISUALIZATION = false;
+  else BUTTON_VISUALIZATION = true;
   drawObjects();
 }
 

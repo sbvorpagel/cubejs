@@ -124,12 +124,70 @@ function drawObjects() {
     }
   }
 
+  drawView = function () {
+    var list = CUBES.getObjects();
+    for(var j = 0; j < list.length; j++){
+      var cubes = list[j].getObjects();
+      for (var x = 0; x < cubes.length; x++) {
+        var cube = cubes[x];
+        console.log("To na view, sou um ", cube.cube2matrix())
+
+        crc = new CRC();
+        crc.generateCrc(VRP, P, view_up);
+        newcube = mf.matrixMultiplication(crc.getCrc(), cube.cube2matrix());
+
+        vis = new Visualization();
+
+        if (BUTTON_VISUALIZATION) {
+          crc = new CRC();
+          crc.generateCrc(VRP, P);
+          newcube = mf.matrixMultiplication(crc.getCrc(), cube.cube2matrix());
+          newnewcube = vis.isometric(newcube);
+          cube_draw = newnewcube;
+        } else {
+          vrpl = mf.matrixMultiplication(crc.getCrc(), [VRP])[0];
+          pl = mf.matrixMultiplication(crc.getCrc(), [P])[0];
+          perspectiva = vis.perspective(vrpl, pl, Math.abs(pl[2]));
+          newnewcube = mf.matrixMultiplication(perspectiva, newcube);
+          newnewnewcube = mf.normalizeMatrix(newnewcube);
+          cube_draw = newnewnewcube;
+        }
+
+        console.log(cube)
+
+      for (var i = 0; i < 6; i++) {
+
+          var f = cube.faces[i];
+          if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
+            ctview.strokeStyle="#000000";
+
+            for (var nx = 0; nx < SELECTED.length; nx++) {
+              if (SELECTED[nx] == j) {
+                ctview.strokeStyle="#2E9AFE";
+              }
+            }
+
+            ctview.beginPath();
+            ctview.moveTo(cube_draw[f[0]][0], cube_draw[f[0]][1]);
+            ctview.lineTo(cube_draw[f[1]][0], cube_draw[f[1]][1]);
+            ctview.lineTo(cube_draw[f[2]][0], cube_draw[f[2]][1]);
+            ctview.lineTo(cube_draw[f[3]][0], cube_draw[f[3]][1]);
+            ctview.closePath();
+            ctview.stroke();
+          }
+        }
+      }
+    }
+  }
+
   // Clears all the canvas and draws the modified objects
   ctxy.clearRect(0,0,this.canvas[0].width,this.canvas[0].height) // Canvas xy
   ctxz.clearRect(0,0,this.canvas[1].width,this.canvas[1].height) // Canvas xz
   ctzy.clearRect(0,0,this.canvas[2].width,this.canvas[2].height) // Canvas zy
+  ctview.clearRect(0,0,this.canvas[2].width,this.canvas[2].height) // Canvas zy
   drawXY();
   drawZY();
   drawXZ();
+  drawView();
 
 }
