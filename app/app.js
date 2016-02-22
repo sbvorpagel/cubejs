@@ -29,7 +29,6 @@ function set_all_false() {
 }
 
 function button_save(name, type) {
-  console.log(CUBES);
   var a = document.createElement("a");
   var file = new Blob([CUBES.to_file()], {type: type});
   a.href = URL.createObjectURL(file);
@@ -60,16 +59,28 @@ function button_select() {
 }
 
 function button_cubes() {
-  if (BUTTON_CUBES == true) BUTTON_CUBES = false;
-  else BUTTON_CUBES = true;
+  if (BUTTON_CUBES == true) 
+      BUTTON_CUBES = false;
+  else 
+      BUTTON_CUBES = true;
   if (SELECTED.length > 1) {
-    var cont = 0;
-    for (var i = 1; i < SELECTED.length; i++) {
-      cont++;
-      var a = CUBES.getObjects()[i].getObjects();
-      CUBES.getObjects()[SELECTED[0]].getObjects().push(a[0]);
+    /* Creates a new list where the selected cubes will be grouped */
+    var group = new Objects();
+    for (var i = 0; i < SELECTED.length; i++) {
+      /* Gets the first list of cube(s) from the CUBES array with SELECTED[i] index */
+      var a = CUBES.getObjects()[SELECTED[i]];
+     
+     /* Add the first item on the CUBES list to the group */ 
+      group.addObjects(a);
     }
-    CUBES.getObjects().splice(1, cont);
+    
+    /* Remove the objects grouped from the CUBES list */
+    for(var i = 0; i < SELECTED.length; i++){
+      CUBES.getObjects().splice(SELECTED[i],1);   
+    }
+    
+    /* Adds the group as one object to the CUBES list */
+    CUBES.addObjects(group);
   }
   SELECTED = [];
   drawObjects();

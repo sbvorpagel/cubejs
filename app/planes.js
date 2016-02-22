@@ -97,8 +97,10 @@ function select_cube_xy(event) {
   var index = getDistance(CUBES.getObjects(), click, 0, 1)
 
   // If some cube was selected
-  if(index != -1 )
-    SELECTED.push(index);
+  if(index != -1 ){
+    if(SELECTED.indexOf(index) == -1)
+      SELECTED.push(index);
+  }
   drawObjects();
 }
 
@@ -108,8 +110,10 @@ function select_cube_xz(event) {
   var index = getDistance(CUBES.getObjects(), click, 0, 2)
 
   // If some cube was selected
-  if(index != -1 )
-    SELECTED.push(index)
+  if(index != -1 ){
+    if(SELECTED.indexOf(index) == -1)
+      SELECTED.push(index)
+  }
   drawObjects();
 }
 
@@ -119,8 +123,10 @@ function select_cube_zy(event) {
   var index = getDistance(CUBES.getObjects(), click, 2, 1)
 
   // If some cube was selected
-  if(index != -1 )
-    SELECTED.push(index)
+  if(index != -1 ){
+    if(SELECTED.indexOf(index) == -1)
+      SELECTED.push(index)
+  }
   drawObjects();
 }
 
@@ -154,6 +160,7 @@ function xyDownT(e){
 function xyUpT(){
  dragok = false;
  xy.removeEventListener('mousemove', xyMoveT, false);
+ console.log(SELECTED);
 }
 
 function xzMoveT(e){
@@ -194,7 +201,7 @@ function zyMoveT(e){
     y = e.y - rect.top;
   }
   for (var i = 0; i < SELECTED.length; i++) {
-    translation(0, x-iX, y-iY, CUBES.getObjects()[SELECTED[i]].getObjects());
+    translation(0,y-iY, x-iX, CUBES.getObjects()[SELECTED[i]].getObjects());
   }
   iX = x;
   iY = y;
@@ -208,7 +215,7 @@ function zyDownT(e){
   iY = e.y - rect.top;
   iZ = CENTER_Z;
   dragok = true;
-  zy.addEventListener('mousemove', zyMoveT, false);
+  zy.addEventListener('mousemove', zyMoveT, false);a
 }
 
 function zyUpT(){

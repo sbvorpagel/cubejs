@@ -92,38 +92,37 @@ function rotation_z (angule, cubes) {
   return cubes;
 }
 
-function rotation_y (angule, cubes) {
-  var cos = Math.cos(angule*PI/180);
-  var sin = Math.sin(angule*PI/180);
-  matriz_ry = [
-    [cos, 0, sin, 0],
-    [0, 1, 0, 0],
-    [-sin, 0, cos, 0],
-    [0, 0, 0, 1]
-  ];
-  var center = centerCubes(cubes);
-  cubes = translationNC(-center[0], -center[1], -center[2], cubes);
-  for (var c = 0; c < cubes.length; c++) {
-    var cube = cubes[c].cube2matrix();
-    cube = multiply(matriz_ry, cube);
-    cubes[c].matrix2cube(cube);
-  }
-  cubes = translationNC(center[0], center[1], center[2], cubes);
-  return cubes;
-}
+    function rotation_y (angule, cubes) {
+      var cos = Math.cos(angule*PI/180);
+      var sin = Math.sin(angule*PI/180);
+      matriz_ry = [
+        [cos, 0, sin, 0],
+        [0, 1, 0, 0],
+        [-sin, 0, cos, 0],
+        [0, 0, 0, 1]
+      ];
+      var center = centerCubes(cubes);
+      cubes = translationNC(-center[0], -center[1], -center[2], cubes);
+      for (var c = 0; c < cubes.length; c++) {
+        var cube = cubes[c].cube2matrix();
+        cube = multiply(matriz_ry, cube);
+        cubes[c].matrix2cube(cube);
+      }
+      cubes = translationNC(center[0], center[1], center[2], cubes);
+      return cubes;
+    }
 
-function rotation_x (angule, cubes) {
-  var cos = Math.cos(angule*PI/180);
-  var sin = Math.sin(angule*PI/180);
-  matriz_rx = [
-    [1, 0, 0, 0],
-    [0, cos, -sin, 0],
-    [0, sin, cos, 0],
-    [0, 0, 0, 1]
-  ];
-  console.log(cubes);
-  var center = centerCubes(cubes);
-  cubes = translationNC(-center[0], -center[1], -center[2], cubes);
+    function rotation_x (angule, cubes) {
+      var cos = Math.cos(angule*PI/180);
+      var sin = Math.sin(angule*PI/180);
+      matriz_rx = [
+        [1, 0, 0, 0],
+        [0, cos, -sin, 0],
+        [0, sin, cos, 0],
+        [0, 0, 0, 1]
+      ];
+      var center = centerCubes(cubes);
+      cubes = translationNC(-center[0], -center[1], -center[2], cubes);
   for (var c = 0; c < cubes.length; c++) {
     var cube = cubes[c].cube2matrix();
     cube = multiply(matriz_rx, cube);
