@@ -21,7 +21,7 @@ function drawObjects() {
   // Draws the objects on the xy canvas
   drawXY = function() {
     var list = CUBES.getObjects();
- 
+
     var processed = 0;
     var i_stack = new Array();  // indexes stack
     var obj_stack = new Array();// objects stack
@@ -29,8 +29,8 @@ function drawObjects() {
     var next;
     var index = 0;              // current index;
     var color = "#000000";
-    
-      
+
+
     while(processed != TOTAL){
       /* Checks if the object is selected and must be ploted with a blue color */
       if((obj_stack.length == 0) && (i_stack.length == 0)){
@@ -53,8 +53,8 @@ function drawObjects() {
       catch(next){
         /* Draw the cube on the canvas */
         cube = current[0];
-        
-        for(var i = 0; i < 6; i ++){    
+
+        for(var i = 0; i < 6; i ++){
           var f = cube.faces[i];
           if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
             ctxy.strokeStyle=color;
@@ -78,7 +78,7 @@ function drawObjects() {
 
   drawXZ = function() {
     var list = CUBES.getObjects();
- 
+
     var processed = 0;
     var i_stack = new Array();  // indexes stack
     var obj_stack = new Array();// objects stack
@@ -86,7 +86,7 @@ function drawObjects() {
     var next;
     var index = 0;              // current index;
     var color = "#000000";
-    
+
     while(processed != TOTAL){
       /* Checks if the object is selected and must be ploted with a blue color */
       if((obj_stack.length == 0) && (i_stack.length == 0)){
@@ -99,7 +99,7 @@ function drawObjects() {
             }
         }
       }
-      
+
       try{
         next = current[index].getObjects();
         obj_stack.push(current);
@@ -110,7 +110,7 @@ function drawObjects() {
         /* Draw the cube on the canvas */
         cube = current[0];
 
-        for(var i = 0; i < 6; i ++){    
+        for(var i = 0; i < 6; i ++){
           var f = cube.faces[i];
           if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
             ctxz.strokeStyle=color;
@@ -121,7 +121,7 @@ function drawObjects() {
             ctxz.lineTo(cube.vertices[[f[3]]].x, cube.vertices[[f[3]]].z);
             ctxz.closePath();
             ctxz.stroke();
-          
+
           }
         }
         current = obj_stack.pop();
@@ -134,7 +134,7 @@ function drawObjects() {
 
   drawZY = function() {
     var list = CUBES.getObjects();
- 
+
     var processed = 0;
     var i_stack = new Array();  // indexes stack
     var obj_stack = new Array();// objects stack
@@ -142,7 +142,7 @@ function drawObjects() {
     var next;
     var index = 0;              // current index;
     var color = "#000000";
-    
+
     while(processed != TOTAL){
       /* Checks if the object is selected and must be ploted with a blue color */
       if((obj_stack.length == 0) && (i_stack.length == 0)){
@@ -166,11 +166,11 @@ function drawObjects() {
         /* Draw the cube on the canvas */
         cube = current[0];
 
-        for(var i = 0; i < 6; i ++){    
+        for(var i = 0; i < 6; i ++){
           var f = cube.faces[i];
           if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
             ctzy.strokeStyle=color;
-            
+
             ctzy.beginPath();
             ctzy.moveTo(cube.vertices[[f[0]]].z, cube.vertices[[f[0]]].y);
             ctzy.lineTo(cube.vertices[[f[1]]].z, cube.vertices[[f[1]]].y);
@@ -187,10 +187,10 @@ function drawObjects() {
       }
     }
   }
-  
+
   drawView = function() {
     var list = CUBES.getObjects();
- 
+
     var processed = 0;
     var i_stack = new Array();  // indexes stack
     var obj_stack = new Array();// objects stack
@@ -221,7 +221,7 @@ function drawObjects() {
       catch(next){
         /* Draw the cube on the canvas */
         cube = current[0];
-        
+
         crc = new CRC();
         crc.generateCrc(VRP, P, view_up);
         newcube = mf.matrixMultiplication(crc.getCrc(), cube.cube2matrix());
@@ -242,8 +242,8 @@ function drawObjects() {
           newnewnewcube = mf.normalizeMatrix(newnewcube);
           cube_draw = newnewnewcube;
         }
-       
-        for(var i = 0; i < 6; i ++){    
+
+        for(var i = 0; i < 6; i ++){
           var f = cube.faces[i];
           if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
             ctview.strokeStyle=color;
@@ -294,24 +294,25 @@ function drawObjects() {
 
       cube_ant = cube.cube2matrix();
       for (var i = 0; i < 6; i++) {
-          if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
-            ctview.strokeStyle="#000000";
-            ctxy.strokeStyle="#000000";
-            ctxz.strokeStyle="#000000";
-            ctzy.strokeStyle="#000000";
-            ctview.Style="#000000";
-            ctxy.fillStyle="#000000";
-            ctxz.fillStyle="#000000";
-            ctzy.fillStyle="#000000";
 
-            for (var nx = 0; nx < SELECTED.length; nx++) {
-              if (SELECTED[nx] == j) {
-                ctview.strokeStyle="#2E9AFE";
-                ctxy.strokeStyle="#2E9AFE";
-                ctxz.strokeStyle="#2E9AFE";
-                ctzy.strokeStyle="#2E9AFE";
-              }
+          ctview.strokeStyle="#000000";
+          ctxy.strokeStyle="#000000";
+          ctxz.strokeStyle="#000000";
+          ctzy.strokeStyle="#000000";
+          ctview.Style="#000000";
+          ctxy.fillStyle="#000000";
+          ctxz.fillStyle="#000000";
+          ctzy.fillStyle="#000000";
+
+          for (var nx = 0; nx < SELECTED.length; nx++) {
+            if (SELECTED[nx] == j) {
+              ctview.strokeStyle="#2E9AFE";
+              ctxy.strokeStyle="#2E9AFE";
+              ctxz.strokeStyle="#2E9AFE";
+              ctzy.strokeStyle="#2E9AFE";
             }
+          }
+          if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
             poly=getPolXY(cube_ant, cube.getFace(i));
             ctxy.beginPath();
             ctxy.moveTo(poly[0], poly[1]);
@@ -319,6 +320,8 @@ function drawObjects() {
             ctxy.closePath();
             ctxy.fill();
             ctxy.stroke();
+          }
+          if (visible(cube.normal(i), [0,1,0]) || !BUTTON_VISIBLE) {
             ctxz.beginPath();
             poly=getPolXZ(cube_ant, cube.getFace(i));
             ctxz.moveTo(poly[0], poly[1]);
@@ -326,6 +329,8 @@ function drawObjects() {
             ctxz.closePath();
             ctxz.fill();
             ctxz.stroke();
+          }
+          if (visible(cube.normal(i), [-1,0,0]) || !BUTTON_VISIBLE) {
             ctzy.beginPath();
             poly=getPolZY(cube_ant, cube.getFace(i));
             ctzy.moveTo(poly[0], poly[1]);
@@ -333,6 +338,8 @@ function drawObjects() {
             ctzy.closePath();
             ctzy.fill();
             ctzy.stroke();
+          }
+          if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
             poly=getPolXY(cube_draw, cube.getFace(i));
             ctview.moveTo(poly[0], poly[1]);
             for( item=2 ; item < poly.length-1 ; item+=2 ){ctview.lineTo( poly[item] , poly[item+1] )}
@@ -341,6 +348,7 @@ function drawObjects() {
             ctview.stroke();
           }
         }
+
       }
     }
   }
@@ -389,10 +397,12 @@ function drawObjects() {
   ctxz.clearRect(0,0,this.canvas[1].width,this.canvas[1].height) // Canvas xz
   ctzy.clearRect(0,0,this.canvas[2].width,this.canvas[2].height) // Canvas zy
   ctview.clearRect(0,0,this.canvas[2].width,this.canvas[2].height) // Canvas zy
+  if (BUTTON_FLAT) drawFlat();
   drawXY();
   drawZY();
   drawXZ();
   drawView();
-  if (BUTTON_FLAT) drawFlat();
+
+
 
 }
