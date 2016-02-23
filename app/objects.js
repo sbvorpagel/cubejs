@@ -18,9 +18,19 @@ function Objects() {
     if(this.objects.length == 1){
         this.center = list.center;
     }else{
-        
-    }
+        var minX=9999, minY=9999, minZ=9999, maxX=-1, maxY=-1, maxZ=-1;
+        for (var i = 0; i < this.objects.length; i++) {
+          if (this.objects[i].center[0] < minX) minX = this.objects[i].center[0];
+          if (this.objects[i].center[0] > maxX) maxX = this.objects[i].center[0];
+          if (this.objects[i].center[1] < minY) minY = this.objects[i].center[1];
+          if (this.objects[i].center[1] > maxY) maxY = this.objects[i].center[1];
+          if (this.objects[i].center[2] < minZ) minZ = this.objects[i].center[2];
+          if (this.objects[i].center[2] > maxZ) maxZ = this.objects[i].center[2];
+        }
+       this.center = [(maxX-minX)/2, (maxY-minY)/2, (maxZ-minZ)/2];
+      }    
   }
+  
 
   // Gets the list an returns it
   this.getObjects= function() {
@@ -58,5 +68,9 @@ function Objects() {
       this.objects.push(objs);
     }
     return this.objects;
+  }
+
+  this.getCenter = function(){
+      return this.center;
   }
 }

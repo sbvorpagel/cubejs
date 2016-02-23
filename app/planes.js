@@ -49,13 +49,10 @@ getDistance = function (cubes, click, a, b){
   var center;
 
   for(var i = 0; i < objects.length; i++){
-    list = objects[i].getObjects();
-    for(var j = 0; j < list.length; j++){
-      center = list[j].getCenter();
-      if((click[0] <= (center[a] + JUMP)) && (click[0] >= (center[a] - JUMP))){
-        if((click[1] <= (center[b] + JUMP)) && (click[1] >= (center[b] - JUMP))){
-          listIndex = i;
-        }
+    center = objects[i].getCenter();
+    if((click[0] <= (center[a] + JUMP)) && (click[0] >= (center[a] - JUMP))){
+      if((click[1] <= (center[b] + JUMP)) && (click[1] >= (center[b] - JUMP))){
+        listIndex = i;
       }
     }
   }
@@ -197,12 +194,41 @@ function xyUpT(){
 function xzMoveT(e){
   var rect = xz.getBoundingClientRect();
   var x, y, z;
+  
   if (dragok) {
     x = e.x - rect.left;
     y = e.y - rect.top;
   }
   for (var i = 0; i < SELECTED.length; i++) {
-    translation(x-iX, 0, y-iY, CUBES.getObjects()[SELECTED[i]].getObjects());
+    var list = CUBES.getObjects();
+    
+    var loop = true;
+    var i_stack = new Array();  // indexes stack
+    var obj_stack = new Array();// objects stack
+    var current = list[SELECTED[i]].getObjects();
+    var next = null;
+    var index = 0;              // current index;
+    while(loop){
+      try{
+        next = current[index].getObjects();
+        obj_stack.push(current);
+        i_stack.push(index);
+        current = next;
+      }
+      catch(next){
+        /* Here is a tricky part: if both stacks are empty (first level of the tree)
+         * and the index is equal to the first level array length, the algorithm is done */
+       translation(x-iX, 0, y-iY, current[0]);
+       if((obj_stack.length != 0) && (i_stack.length !=0)){
+          current = obj_stack.pop();
+          index = i_stack.pop();
+          index++;
+        }else{
+          if(index == (current.length - 1))
+            loop = false;
+        }
+      }
+    }
   }
   iX = x;
   iY = y;
@@ -223,16 +249,44 @@ function xzUpT(){
  dragok = false;
  xz.removeEventListener('mousemove', xzMoveT, false);
 }
-
-function zyMoveT(e){
+function xzMoveT(e){
   var rect = zy.getBoundingClientRect();
   var x, y, z;
+  
   if (dragok) {
     x = e.x - rect.left;
     y = e.y - rect.top;
   }
   for (var i = 0; i < SELECTED.length; i++) {
-    translation(0,y-iY, x-iX, CUBES.getObjects()[SELECTED[i]].getObjects());
+    var list = CUBES.getObjects();
+    
+    var loop = true;
+    var i_stack = new Array();  // indexes stack
+    var obj_stack = new Array();// objects stack
+    var current = list[SELECTED[i]].getObjects();
+    var next = null;
+    var index = 0;              // current index;
+    while(loop){
+      try{
+        next = current[index].getObjects();
+        obj_stack.push(current);
+        i_stack.push(index);
+        current = next;
+      }
+      catch(next){
+        /* Here is a tricky part: if both stacks are empty (first level of the tree)
+         * and the index is equal to the first level array length, the algorithm is done */
+       translation(0,y-iY, x-iX, current[0]);
+       if((obj_stack.length != 0) && (i_stack.length !=0)){
+          current = obj_stack.pop();
+          index = i_stack.pop();
+          index++;
+        }else{
+          if(index == (current.length - 1))
+            loop = false;
+        }
+      }
+    }
   }
   iX = x;
   iY = y;
