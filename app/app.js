@@ -23,6 +23,7 @@ var BUTTON_ROTATION = false;
 var BUTTON_SCALE = false;
 var BUTTON_VISIBLE = false;
 var BUTTON_VISUALIZATION = false;
+var BUTTON_FLAT = false;
 
 
 var CENTER_X = 315;
@@ -134,7 +135,11 @@ function button_visualization() {
   drawObjects();
 }
 
-
+function button_flat() {
+  if (BUTTON_FLAT == true) BUTTON_FLAT = false;
+  else BUTTON_FLAT = true;
+  drawObjects();
+}
 
 window.onload = main;
 

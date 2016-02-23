@@ -105,4 +105,8 @@ function Cube() {
   this.getCenter = function(){
     return this.center
   }
+
+  this.getFace = function(i) {
+    return this.faces[i];
+  }
 }

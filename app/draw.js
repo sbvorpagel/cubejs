@@ -53,7 +53,7 @@ function drawObjects() {
       catch(next){
         /* Draw the cube on the canvas */
         cube = current[0];
-
+        
         for(var i = 0; i < 6; i ++){    
           var f = cube.faces[i];
           if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
@@ -265,6 +265,125 @@ function drawObjects() {
     }
   }
 
+  drawFlat = function() {
+    var list = CUBES.getObjects();
+    for(var j = 0; j < list.length; j++){
+      var cubes = list[j].getObjects();
+      for (var x = 0; x < cubes.length; x++) {
+        var cube = cubes[x];
+        crc = new CRC();
+        crc.generateCrc(VRP, P, view_up);
+        newcube = mf.matrixMultiplication(crc.getCrc(), cube.cube2matrix());
+
+        vis = new Visualization();
+
+        if (BUTTON_VISUALIZATION) {
+          crc = new CRC();
+          crc.generateCrc(VRP, P);
+          newcube = mf.matrixMultiplication(crc.getCrc(), cube.cube2matrix());
+          newnewcube = vis.isometric(newcube);
+          cube_draw = newnewcube;
+        } else {
+          vrpl = mf.matrixMultiplication(crc.getCrc(), [VRP])[0];
+          pl = mf.matrixMultiplication(crc.getCrc(), [P])[0];
+          perspectiva = vis.perspective(vrpl, pl, Math.abs(pl[2]));
+          newnewcube = mf.matrixMultiplication(perspectiva, newcube);
+          newnewnewcube = mf.normalizeMatrix(newnewcube);
+          cube_draw = newnewnewcube;
+        }
+
+      cube_ant = cube.cube2matrix();
+      for (var i = 0; i < 6; i++) {
+          if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
+            ctview.strokeStyle="#000000";
+            ctxy.strokeStyle="#000000";
+            ctxz.strokeStyle="#000000";
+            ctzy.strokeStyle="#000000";
+            ctview.Style="#000000";
+            ctxy.fillStyle="#000000";
+            ctxz.fillStyle="#000000";
+            ctzy.fillStyle="#000000";
+
+            for (var nx = 0; nx < SELECTED.length; nx++) {
+              if (SELECTED[nx] == j) {
+                ctview.strokeStyle="#2E9AFE";
+                ctxy.strokeStyle="#2E9AFE";
+                ctxz.strokeStyle="#2E9AFE";
+                ctzy.strokeStyle="#2E9AFE";
+              }
+            }
+            poly=getPolXY(cube_ant, cube.getFace(i));
+            ctxy.beginPath();
+            ctxy.moveTo(poly[0], poly[1]);
+            for( item=2 ; item < poly.length-1 ; item+=2 ){ctxy.lineTo( poly[item] , poly[item+1] )}
+            ctxy.closePath();
+            ctxy.fill();
+            ctxy.stroke();
+            ctxz.beginPath();
+            poly=getPolXZ(cube_ant, cube.getFace(i));
+            ctxz.moveTo(poly[0], poly[1]);
+            for( item=2 ; item < poly.length-1 ; item+=2 ){ctxz.lineTo( poly[item] , poly[item+1] )}
+            ctxz.closePath();
+            ctxz.fill();
+            ctxz.stroke();
+            ctzy.beginPath();
+            poly=getPolZY(cube_ant, cube.getFace(i));
+            ctzy.moveTo(poly[0], poly[1]);
+            for( item=2 ; item < poly.length-1 ; item+=2 ){ctzy.lineTo( poly[item] , poly[item+1] )}
+            ctzy.closePath();
+            ctzy.fill();
+            ctzy.stroke();
+            poly=getPolXY(cube_draw, cube.getFace(i));
+            ctview.moveTo(poly[0], poly[1]);
+            for( item=2 ; item < poly.length-1 ; item+=2 ){ctview.lineTo( poly[item] , poly[item+1] )}
+            ctview.closePath();
+            ctview.fill();
+            ctview.stroke();
+          }
+        }
+      }
+    }
+  }
+
+  getPolXY = function (c, ind) {
+    b = new Array(8);
+    b[0] = c[ind[0]][0];
+    b[1] = c[ind[0]][1];
+    b[2] = c[ind[1]][0];
+    b[3] = c[ind[1]][1];
+    b[4] = c[ind[2]][0];
+    b[5] = c[ind[2]][1];
+    b[6] = c[ind[3]][0];
+    b[7] = c[ind[3]][1];
+    return b
+  }
+
+  getPolXZ = function (c, ind) {
+    b = new Array(8);
+    b[0] = c[ind[0]][0];
+    b[1] = c[ind[0]][2];
+    b[2] = c[ind[1]][0];
+    b[3] = c[ind[1]][2];
+    b[4] = c[ind[2]][0];
+    b[5] = c[ind[2]][2];
+    b[6] = c[ind[3]][0];
+    b[7] = c[ind[3]][2];
+    return b
+  }
+
+  getPolZY = function (c, ind) {
+    b = new Array(8);
+    b[0] = c[ind[0]][2];
+    b[1] = c[ind[0]][1];
+    b[2] = c[ind[1]][2];
+    b[3] = c[ind[1]][1];
+    b[4] = c[ind[2]][2];
+    b[5] = c[ind[2]][1];
+    b[6] = c[ind[3]][2];
+    b[7] = c[ind[3]][1];
+    return b
+  }
+
   // Clears all the canvas and draws the modified objects
   ctxy.clearRect(0,0,this.canvas[0].width,this.canvas[0].height) // Canvas xy
   ctxz.clearRect(0,0,this.canvas[1].width,this.canvas[1].height) // Canvas xz
@@ -274,5 +393,6 @@ function drawObjects() {
   drawZY();
   drawXZ();
   drawView();
+  if (BUTTON_FLAT) drawFlat();
 
 }
