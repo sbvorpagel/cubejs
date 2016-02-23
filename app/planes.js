@@ -68,6 +68,7 @@ function create_cube_xy(event) {
   cube.createCube(event.x - rect.left, event.y - rect.top, CENTER_Z);
   list.addObjects(cube)
   CUBES.addObjects(list);
+  TOTAL++;
   drawObjects();
 }
 
@@ -78,6 +79,7 @@ function create_cube_xz(event) {
   cube.createCube(event.x - rect.left, CENTER_Y ,event.y - rect.top);
   list.addObjects(cube)
   CUBES.addObjects(list);
+  TOTAL++;
   drawObjects();
 }
 
@@ -88,6 +90,7 @@ function create_cube_zy(event) {
   cube.createCube(CENTER_X, event.y - rect.top, event.x - rect.left);
   list.addObjects(cube);
   CUBES.addObjects(list);
+  TOTAL++;
   drawObjects();
 }
 
@@ -95,7 +98,7 @@ function select_cube_xy(event) {
   var rect = xy.getBoundingClientRect();
   var click = [event.x - rect.left, event.y - rect.top];
   var index = getDistance(CUBES.getObjects(), click, 0, 1)
-
+  
   // If some cube was selected
   if(index != -1 ){
     if(SELECTED.indexOf(index) == -1)
@@ -135,12 +138,41 @@ var iX, iY, iZ;
 function xyMoveT(e){
   var rect = xy.getBoundingClientRect();
   var x, y, z;
+  
   if (dragok) {
     x = e.x - rect.left;
     y = e.y - rect.top;
   }
   for (var i = 0; i < SELECTED.length; i++) {
-    translation(x-iX, y-iY, 0, CUBES.getObjects()[SELECTED[i]].getObjects());
+    var list = CUBES.getObjects();
+    
+    var loop = true;
+    var i_stack = new Array();  // indexes stack
+    var obj_stack = new Array();// objects stack
+    var current = list[SELECTED[i]].getObjects();
+    var next = null;
+    var index = 0;              // current index;
+    while(loop){
+      try{
+        next = current[index].getObjects();
+        obj_stack.push(current);
+        i_stack.push(index);
+        current = next;
+      }
+      catch(next){
+        /* Here is a tricky part: if both stacks are empty (first level of the tree)
+         * and the index is equal to the first level array length, the algorithm is done */
+        translation(x-iX, y-iY, 0, current[0]);
+        if((obj_stack.length != 0) && (i_stack.length !=0)){
+          current = obj_stack.pop();
+          index = i_stack.pop();
+          index++;
+        }else{
+          if(index == (current.length - 1))
+            loop = false;
+        }
+      }
+    }
   }
   iX = x;
   iY = y;
@@ -160,7 +192,6 @@ function xyDownT(e){
 function xyUpT(){
  dragok = false;
  xy.removeEventListener('mousemove', xyMoveT, false);
- console.log(SELECTED);
 }
 
 function xzMoveT(e){

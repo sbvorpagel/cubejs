@@ -29,6 +29,7 @@ var CENTER_X = 315;
 var CENTER_Y = 163;
 var CENTER_Z = 163;
 var JUMP     = 30;
+var TOTAL = 0;
 
 function set_all_false() {
   BUTTON_CUBE = false;
@@ -82,12 +83,15 @@ function button_cubes() {
      /* Add the first item on the CUBES list to the group */
       group.addObjects(a);
     }
-
     /* Remove the objects grouped from the CUBES list */
     for(var i = 0; i < SELECTED.length; i++){
       CUBES.getObjects().splice(SELECTED[i],1);
-    }
 
+      /* Since CUBES has less 1 element, we must adapt the indexes on SELECTED */
+      for(var j = 0; j < SELECTED.length; j++)
+          /*If the index is bigger than zero, decrement it */
+          if(SELECTED[j] != 0) SELECTED[j]--;
+    }
     /* Adds the group as one object to the CUBES list */
     CUBES.addObjects(group);
   }

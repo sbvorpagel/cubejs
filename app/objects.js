@@ -11,10 +11,15 @@
 
 function Objects() {
   this.objects = [];
-
+  this.center;
   // Add a list of one or more elements to the list of Objects
   this.addObjects = function(list) {
     this.objects.push(list);
+    if(this.objects.length == 1){
+        this.center = list.center;
+    }else{
+        
+    }
   }
 
   // Gets the list an returns it

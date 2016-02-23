@@ -43,18 +43,16 @@ function centerCubes (cubes) {
 }
 
 function translation (x, y, z, cubes) {
-  for (var c = 0; c < cubes.length; c++) {
-    var cube = cubes[c].cube2matrix();
-    for (var i = 0; i < cube.length; i++) {
-      cube[i][0] = cube[i][0] + x;
-      cube[i][1] = cube[i][1] + y;
-      cube[i][2] = cube[i][2] + z;
-    }
-    cubes[c].center[0] = cubes[c].center[0] + x;
-    cubes[c].center[1] = cubes[c].center[1] + y;
-    cubes[c].center[2] = cubes[c].center[2] + z;
-    cubes[c].matrix2cube(cube);
+  var cube = cubes.cube2matrix();
+  for (var i = 0; i < cube.length; i++) {
+    cube[i][0] = cube[i][0] + x;
+    cube[i][1] = cube[i][1] + y;
+    cube[i][2] = cube[i][2] + z;
   }
+  cubes.center[0] = cubes.center[0] + x;
+  cubes.center[1] = cubes.center[1] + y;
+  cubes.center[2] = cubes.center[2] + z;
+  cubes.matrix2cube(cube);
   return cubes;
 }
 
