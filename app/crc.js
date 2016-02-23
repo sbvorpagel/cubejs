@@ -10,7 +10,8 @@ function CRC() {
   this.crcMatrix = [];
 
   this.getDP = function() {
-    return mf.vectorSize(this.N);
+    console.log("o dp é", DP);
+    return DP;
   }
 
   this.setVRP = function(vrp) {

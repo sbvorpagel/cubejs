@@ -237,7 +237,8 @@ function drawObjects() {
         } else {
           vrpl = mf.matrixMultiplication(crc.getCrc(), [VRP])[0];
           pl = mf.matrixMultiplication(crc.getCrc(), [P])[0];
-          perspectiva = vis.perspective(vrpl, pl, Math.abs(pl[2]));
+          perspectiva = vis.perspective(vrpl, pl, DP);
+          console.log(perspectiva)
           newnewcube = mf.matrixMultiplication(perspectiva, newcube);
           newnewnewcube = mf.normalizeMatrix(newnewcube);
           cube_draw = newnewnewcube;
@@ -295,11 +296,11 @@ function drawObjects() {
       cube_ant = cube.cube2matrix();
       for (var i = 0; i < 6; i++) {
 
-          ctview.strokeStyle="#000000";
+
           ctxy.strokeStyle="#000000";
           ctxz.strokeStyle="#000000";
           ctzy.strokeStyle="#000000";
-          ctview.Style="#000000";
+          ctview.fillStyle="#000000";
           ctxy.fillStyle="#000000";
           ctxz.fillStyle="#000000";
           ctzy.fillStyle="#000000";
@@ -330,7 +331,7 @@ function drawObjects() {
             ctxz.fill();
             ctxz.stroke();
           }
-          if (visible(cube.normal(i), [-1,0,0]) || !BUTTON_VISIBLE) {
+          if (visible(cube.normal(i), [1,0,0]) || !BUTTON_VISIBLE) {
             ctzy.beginPath();
             poly=getPolZY(cube_ant, cube.getFace(i));
             ctzy.moveTo(poly[0], poly[1]);
@@ -341,6 +342,55 @@ function drawObjects() {
           }
           if (visible(cube.normal(i), [0,0,1]) || !BUTTON_VISIBLE) {
             poly=getPolXY(cube_draw, cube.getFace(i));
+
+            ia = [ila[0]*ka[0], ila[1]*ka[1], ila[2]*ka[2]];
+
+            f = cube.getFaceCube(cube_draw, i);
+            N = mf.normal(f);
+            pm = mf.centerPol(f);
+            L = [-pm[0], -pm[1], -pm[2]];
+            console.log(L)
+            L = mf.normalize(L);
+            value = mf.scalarMultiplication(N, L);
+            console.log("arroz", L, N)
+            id = [0, 0, 0];
+            is = [0, 0, 0];
+
+            if (value > 0) {
+              id = [
+                il[0]*kd[0]*value, il[1]*kd[1]*value, il[2]*kd[2]*value
+              ];
+
+              R = [
+                (2*value*N[0])-L[0], (2*value*N[1])-L[1], (2*value*N[2])-L[2]
+              ];
+
+              S = [
+                VRP[0]-pm[0], VRP[1]-pm[1], VRP[2]-pm[2]
+              ];
+              S = mf.normalize(S);
+
+              value2 = Math.pow(mf.scalarMultiplication(R, S), 4);
+
+              is = [
+                il[0] * ks[0] * value2,
+                il[1] * ks[1] * value2,
+                il[2] * ks[2] * value2
+              ];
+            }
+            console.log(ia, id, is)
+            it = [
+                  ia[0]+id[0]+is[0],
+                  ia[1]+id[1]+is[1],
+                  ia[2]+id[2]+is[2]
+                 ];
+
+
+            str = "rgb("+it[0]+","+it[1]+","+it[2]+")";
+            ctview.fillStyle=str;
+            ctview.strokeStyle=str;
+
+
             ctview.moveTo(poly[0], poly[1]);
             for( item=2 ; item < poly.length-1 ; item+=2 ){ctview.lineTo( poly[item] , poly[item+1] )}
             ctview.closePath();
@@ -397,11 +447,13 @@ function drawObjects() {
   ctxz.clearRect(0,0,this.canvas[1].width,this.canvas[1].height) // Canvas xz
   ctzy.clearRect(0,0,this.canvas[2].width,this.canvas[2].height) // Canvas zy
   ctview.clearRect(0,0,this.canvas[2].width,this.canvas[2].height) // Canvas zy
+
+  drawView();
   if (BUTTON_FLAT) drawFlat();
   drawXY();
   drawZY();
   drawXZ();
-  drawView();
+
 
 
 

@@ -18,6 +18,12 @@ function MATH() {
     ];
   }
 
+  this.normal = function(f) {
+    bc = [f[2][0] - f[1][0], f[2][1] - f[1][1], f[2][2] - f[1][2]];
+    ba = [f[0][0] - f[1][0], f[0][1] - f[1][1], f[1][2] - f[1][2]];
+    return (this.normalize(this.vectorMultiplication(bc, ba)));
+  }
+
   this.scalarMultiplication = function(vectorA, vectorB) {
     return (vectorA[0]*vectorB[0]+vectorA[1]*vectorB[1]+vectorA[2]*vectorB[2]);
   }
@@ -48,5 +54,13 @@ function MATH() {
       }
     }
     return m;
+  }
+
+  this.centerPol = function(poly) {
+    return [
+      ((poly[0][0]+poly[1][0])/2),
+      ((poly[1][1]+poly[2][1])/2),
+      ((poly[0][2]+poly[2][2])/2)
+    ];
   }
 }

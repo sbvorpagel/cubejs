@@ -69,6 +69,53 @@
             <li><a onclick="button_visualization()" title="Visualization"><i class="fa fa-eye fa-2x"></i></a></li>
             <li><a onclick="button_flat()" title="Flat"><i class="fa fa-eye fa-2x"></i></a></li>
             <li><a onclick="button_delete()" title="Delete Cube"><i class="fa fa-trash fa-2x"></i></a></li>
+            <li class="dropdown dropdown-large">
+              <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Configurações
+              </button>
+              <ul class="dropdown-menu dropdown-menu-large">
+                <div class="col-md-6">
+                  <li class="dropdown-header">VRP</li>
+                  <li><input id="vrpx" type="number" class="form-control" placeholder="X" aria-describedby="basic-addon1"></li>
+                  <li><input id="vrpy" type="number" class="form-control" placeholder="Y" aria-describedby="basic-addon1"></li>
+                  <li><input id="vrpz" type="number" class="form-control" placeholder="Z" aria-describedby="basic-addon1"></li>
+                  <li class="dropdown-header">P</li>
+                  <li><input id="px" type="number" class="form-control" placeholder="X" aria-describedby="basic-addon1"></li>
+                  <li><input id="py" type="number" class="form-control" placeholder="Y" aria-describedby="basic-addon1"></li>
+                  <li><input id="pz" type="number" class="form-control" placeholder="Z" aria-describedby="basic-addon1"></li>
+                  <li class="dropdown-header">View up</li>
+                  <li><input id="viewx" type="number" class="form-control" placeholder="X" aria-describedby="basic-addon1"></li>
+                  <li><input id="viewy" type="number" class="form-control" placeholder="Y" aria-describedby="basic-addon1"></li>
+                  <li><input id="viewz" type="number" class="form-control" placeholder="Z" aria-describedby="basic-addon1"></li>
+                  <li class="dropdown-header">iLa</li>
+                  <li><input id="ilax" type="number" class="form-control" placeholder="X" aria-describedby="basic-addon1"></li>
+                  <li><input id="ilay" type="number" class="form-control" placeholder="Y" aria-describedby="basic-addon1"></li>
+                  <li><input id="ilaz" type="number" class="form-control" placeholder="Z" aria-describedby="basic-addon1"></li>
+                </div>
+                <div class="col-md-6">
+                  <li class="dropdown-header">iL</li>
+                  <li><input id="ilx" type="number" class="form-control" placeholder="X" aria-describedby="basic-addon1"></li>
+                  <li><input id="ily" type="number" class="form-control" placeholder="Y" aria-describedby="basic-addon1"></li>
+                  <li><input id="ilz" type="number" class="form-control" placeholder="Z" aria-describedby="basic-addon1"></li>
+                  <li class="dropdown-header">Ka</li>
+                  <li><input id="kax" type="number" class="form-control" placeholder="X" aria-describedby="basic-addon1"></li>
+                  <li><input id="kay" type="number" class="form-control" placeholder="Y" aria-describedby="basic-addon1"></li>
+                  <li><input id="kaz" type="number" class="form-control" placeholder="Z" aria-describedby="basic-addon1"></li>
+                  <li class="dropdown-header">Ks</li>
+                  <li><input id="ksx" type="number" class="form-control" placeholder="X" aria-describedby="basic-addon1"></li>
+                  <li><input id="ksy" type="number" class="form-control" placeholder="Y" aria-describedby="basic-addon1"></li>
+                  <li><input id="ksz" type="number" class="form-control" placeholder="Z" aria-describedby="basic-addon1"></li>
+                  <li class="dropdown-header">Kd</li>
+                  <li><input id="kdx" type="number" class="form-control" placeholder="X" aria-describedby="basic-addon1"></li>
+                  <li><input id="kdy" type="number" class="form-control" placeholder="Y" aria-describedby="basic-addon1"></li>
+                  <li><input id="kdz" type="number" class="form-control" placeholder="Z" aria-describedby="basic-addon1"></li>
+                </div>
+                <li><input id="dpinput" type="number" class="form-control" placeholder="dp" aria-describedby="basic-addon1"></li>
+                <center>
+                  <li><a onclick="atualiza_configuracoes()" title="Atualiza Configuracoes"><i class="fa fa-cog fa-2x"></i></a></li>
+                </center>
+              </ul>
+            </li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">

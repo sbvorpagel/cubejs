@@ -1,8 +1,16 @@
 mf = new MATH(); // mathematical functions
 
-VRP = [400, 300, 1000, 1];
-P = [30, 20, 50, 1];
-view_up = [0, 1, 0]
+VRP = [200, 200, 1000, 1];
+P = [0, 0, 0, 1];
+view_up = [0, 1, 0];
+
+ila = [500, 500, 500];
+il = [500, 500, 500];
+ka = [0.3, 0.2, 0.2];
+ks = [0.2, 0.2, 0.2];
+kd = [0.2, 0.2, 0.2];
+DP = 500;
+
 
 
 //Global canvas var
@@ -141,8 +149,80 @@ function button_flat() {
   drawObjects();
 }
 
+function atualiza_configuracoes() {
+  VRP[0] = document.getElementById("vrpx").value;
+  VRP[1] = document.getElementById("vrpy").value;
+  VRP[2] = document.getElementById("vrpz").value;
+
+  P[0] = document.getElementById("px").value;
+  P[1] = document.getElementById("py").value;
+  P[2] = document.getElementById("pz").value;
+
+  view_up[0] = document.getElementById("viewx").value;
+  view_up[1] = document.getElementById("viewy").value;
+  view_up[2] = document.getElementById("viewz").value;
+
+  ila[0] = document.getElementById("ilax").value;
+  ila[1] = document.getElementById("ilay").value;
+  ila[2] = document.getElementById("ilaz").value;
+
+  il[0] = document.getElementById("ilx").value;
+  il[1] = document.getElementById("ily").value;
+  il[2] = document.getElementById("ilz").value;
+
+  ka[0] = document.getElementById("kax").value;
+  ka[1] = document.getElementById("kay").value;
+  ka[2] = document.getElementById("kaz").value;
+
+  ks[0] = document.getElementById("ksx").value;
+  ks[1] = document.getElementById("ksy").value;
+  ks[2] = document.getElementById("ksz").value;
+
+  kd[0] = document.getElementById("kdx").value;
+  kd[1] = document.getElementById("kdy").value;
+  kd[2] = document.getElementById("kdz").value;
+
+  DP = document.getElementById("dpinput").value;
+  drawObjects();
+}
+
 window.onload = main;
 
 function main () {
+
+  document.getElementById("vrpx").value = VRP[0];
+  document.getElementById("vrpy").value = VRP[1];
+  document.getElementById("vrpz").value = VRP[2];
+
+  document.getElementById("px").value = P[0];
+  document.getElementById("py").value = P[1];
+  document.getElementById("pz").value = P[2];
+
+  document.getElementById("viewx").value = view_up[0];
+  document.getElementById("viewy").value = view_up[1];
+  document.getElementById("viewz").value = view_up[2];
+
+  document.getElementById("ilax").value = ila[0];
+  document.getElementById("ilay").value = ila[1];
+  document.getElementById("ilaz").value = ila[2];
+
+  document.getElementById("ilx").value = il[0];
+  document.getElementById("ily").value = il[1];
+  document.getElementById("ilz").value = il[2];
+
+  document.getElementById("kax").value = ka[0];
+  document.getElementById("kay").value = ka[1];
+  document.getElementById("kaz").value = ka[2];
+
+  document.getElementById("ksx").value = ks[0];
+  document.getElementById("ksy").value = ks[1];
+  document.getElementById("ksz").value = ks[2];
+
+  document.getElementById("kdx").value = kd[0];
+  document.getElementById("kdy").value = kd[1];
+  document.getElementById("kdz").value = kd[2];
+
+  document.getElementById("dpinput").value = DP;
+
   startViews();
 }
